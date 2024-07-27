@@ -28,7 +28,6 @@ const removeCookie = () => {
   var params: any = {};
   params["SameSite"] = "None";
   params["Secure"] = true;
-  params["domain"] = getHostname(location.hostname);
   params["days"] = 1000;
   setCookie("auth_token", "", params);
 };
