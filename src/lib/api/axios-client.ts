@@ -2,7 +2,6 @@ import axios from "axios";
 import { interceptorError } from "./refresh-token";
 import { getCookie } from "react-use-cookie";
 
-// axios for API CMS
 export const AxiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_CMS,
   headers: {
@@ -21,8 +20,6 @@ AxiosClient.interceptors.request.use(function (config: any) {
   }
   return config;
 });
-
-
 
 export const fetcherClient = (url: any, params: any) => {
   if (url) {
