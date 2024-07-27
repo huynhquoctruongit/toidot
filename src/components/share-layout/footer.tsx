@@ -1,7 +1,3 @@
-import Image from "next/image";
-import { FacebookIcon, LocationIcon, PhoneIcon } from "@/app/components/icons/index";
-import { ZaloIcon } from "../icons";
-
 const Footer = () => {
 
   return (
