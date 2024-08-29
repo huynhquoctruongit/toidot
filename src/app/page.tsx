@@ -1,6 +1,5 @@
 import Button from "@/components/common/button";
-import { PlayIcon } from "lucide-react";
-import { PlayIconHero } from "@/components/icons/icon";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
