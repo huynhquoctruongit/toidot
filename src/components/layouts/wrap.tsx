@@ -7,18 +7,19 @@ import ToastProvider from "../../context/toast";
 import Header from "../share-layout/header";
 
 const Wrap = ({ children }: any) => {
-
   useEffect(() => {
     const getHeight = () => {
       const innerHeight = window.innerHeight;
       const clientHeight = document.documentElement.clientHeight;
       const height = Math.max(innerHeight, clientHeight);
-      document.documentElement.style.setProperty("--height-screen", `${height}px`);
+      document.documentElement.style.setProperty(
+        "--height-screen",
+        `${height}px`
+      );
     };
     window.addEventListener("resize", getHeight);
     getHeight();
   }, []);
-
 
   return (
     <SWRConfig
@@ -31,12 +32,11 @@ const Wrap = ({ children }: any) => {
     >
       <ToastProvider>
         <Header />
-        <div className="relative z-[1]">{children}</div>
+        <div className="relative z-[1] h-[calc(100%-161px)]">{children}</div>
         <Footer />
       </ToastProvider>
     </SWRConfig>
   );
 };
-
 
 export default Wrap;

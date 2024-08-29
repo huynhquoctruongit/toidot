@@ -1,15 +1,14 @@
 import UserClient from "@/components/layouts/wrap";
-import { Nunito } from "next/font/google";
+import { Nunito, Space_Mono } from "next/font/google";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "./globals.css";
 import "dayjs/locale/vi";
 
-const nunito = Nunito({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+const spaceMono = Space_Mono({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "700"],
 });
-
 
 export default function RootLayout({
   children,
@@ -19,9 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="dmca-site-verification" content="NUFqcGhVQnIydkorSWtjZm9KajdHdz090" />
+        <meta
+          name="dmca-site-verification"
+          content="NUFqcGhVQnIydkorSWtjZm9KajdHdz090"
+        />
       </head>
-      <body className={nunito.className}>
+      <body className={"relative h-screen " + spaceMono.className}>
         <UserClient>{children}</UserClient>
       </body>
     </html>
