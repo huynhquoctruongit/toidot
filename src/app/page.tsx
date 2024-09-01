@@ -7,6 +7,10 @@ import {
   Grid2x2Check,
   NotebookText,
   Youtube,
+  BookOpen,
+  BookType,
+  BoomBox,
+  LockOpen,
 } from "lucide-react";
 
 import { Metadata } from "next";
@@ -21,7 +25,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <div className="content flex h-full flex-col items-center justify-around">
+      <div className="content flex h-full flex-col items-center justify-evenly">
         <div className="text-[20px]">Chào mừng cậu đến với</div>
         <div className="text-[40px] font-bold text-[#2b2b2b]">Tôi dốt</div>
         <div className="text-[14px]">
@@ -86,7 +90,8 @@ export default function Home() {
             Chúng tớ DỐT nhưng muốn cậu giỏi 😍
           </div>
         </div>
-        <div className="socical-icon flex w-[910px] items-center justify-between">
+
+        <div className="socical-icon z-3 relative bottom-5 flex w-[910px] items-center justify-between">
           <div className="socical-fb">
             <Image
               src={"/images/facebook.png"}
@@ -115,6 +120,33 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <div className="icon-see absolute left-2/4 top-2/4 z-[-1] h-[719px] w-[910px] -translate-x-2/4 -translate-y-2/4">
+        <div className="icon relative size-full">
+          <div className="absolute left-0 top-0">
+            <BoomBox className="size-20 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />
+          </div>
+          <div className="absolute right-[20%] top-0">
+            <BookOpen className="size-20 rotate-45 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />
+          </div>
+          <div className="absolute bottom-0 left-0">
+            <BookType className="size-16 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />
+          </div>
+          <div className="absolute bottom-0 right-0">
+            <BoomBox className="size-20 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />
+          </div>
+
+          <div className="absolute left-[30%] top-1/3">
+            <NotebookText className="size-11 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />
+          </div>
+
+          <div className="absolute right-[10%] top-1/4">
+            <LockOpen className="size-11 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute top-[60%] size-[90%] rounded-[100%] bg-[#56BEB0] bg-opacity-5"></div>
     </>
   );
 }

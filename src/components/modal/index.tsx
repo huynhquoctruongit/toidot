@@ -9,9 +9,18 @@ const variants = {
   open: { opacity: 1, transition: { duration: 0.08 } },
   closed: { opacity: 0 },
 };
-const WrapModal = ({ children, isOpen, backdrop, setOpen = () => {}, className }: any) => {
+const WrapModal = ({
+  children,
+  isOpen,
+  backdrop,
+  setOpen = () => {},
+  className,
+}: any) => {
   const background = backdrop || (
-    <div onClick={() => setOpen(false)} className="w-screen h-screen backdrop-blur-[1px] bg-[black]/10"></div>
+    <div
+      onClick={() => setOpen(false)}
+      className="h-screen w-screen bg-[black]/10 backdrop-blur-[1px]"
+    ></div>
   );
   return (
     <AnimatePresence>
@@ -21,21 +30,27 @@ const WrapModal = ({ children, isOpen, backdrop, setOpen = () => {}, className }
           animate={"open"}
           exit={"closed"}
           initial={"closed"}
-          className="fixed top-0 left-0 w-screen h-screen z-[10000000] justify-center flex items-center"
+          className="fixed left-0 top-0 z-[10000000] flex h-screen w-screen items-center justify-center"
         >
-          <div className="absolute top-0 left-0">{background}</div>
+          <div className="absolute left-0 top-0">{background}</div>
           <div className={cn("fixed", className)}>{children}</div>
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
-const Modal = ({ children, isOpen, setOpen = () => {}, backdrop, className }: any) => {
+const Modal = ({
+  children,
+  isOpen,
+  setOpen = () => {},
+  backdrop,
+  className,
+}: any) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "hidden";
     }
     const handleKeyDown = (e: any) => {
       if (e.key === "Escape") {
@@ -45,13 +60,18 @@ const Modal = ({ children, isOpen, setOpen = () => {}, backdrop, className }: an
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "hidden";
     };
   }, [isOpen]);
   if (typeof window === "undefined") return null;
 
   return createPortal(
-    <WrapModal isOpen={isOpen} setOpen={setOpen} backdrop={backdrop} className={className}>
+    <WrapModal
+      isOpen={isOpen}
+      setOpen={setOpen}
+      backdrop={backdrop}
+      className={className}
+    >
       {children}
     </WrapModal>,
     document.body,

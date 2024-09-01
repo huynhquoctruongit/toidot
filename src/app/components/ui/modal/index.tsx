@@ -13,7 +13,13 @@ interface PropsAux {
   disableClose?: any;
   preventHideClickOverlay?: any;
 }
-const ModalView = ({ open, toggle = () => {}, children, disableClose, preventHideClickOverlay }: PropsAux) => {
+const ModalView = ({
+  open,
+  toggle = () => {},
+  children,
+  disableClose,
+  preventHideClickOverlay,
+}: PropsAux) => {
   useEffect(() => {
     const handleClose = (event: any) => {
       const code = event.keyCode || event.which;
@@ -46,7 +52,13 @@ const ModalView = ({ open, toggle = () => {}, children, disableClose, preventHid
 };
 export default ModalView;
 
-const Content = ({ disableClose, preventHideClickOverlay, toggle, open, children }: any) => {
+const Content = ({
+  disableClose,
+  preventHideClickOverlay,
+  toggle,
+  open,
+  children,
+}: any) => {
   const onClickBackdrop = () => {
     if (disableClose === true || preventHideClickOverlay === true) {
       return;
@@ -71,10 +83,15 @@ const Content = ({ disableClose, preventHideClickOverlay, toggle, open, children
         ease: "linear",
         duration: 0.1,
       }}
-      className="fixed flex items-center lg:justify-center z-[10000] top-0 left-0 w-screen h-screen backdrop-blur-[2px] bg-black/20"
+      className="fixed left-0 top-0 z-[10000] flex h-screen w-screen items-center bg-black/20 backdrop-blur-[2px] lg:justify-center"
     >
-      <div onClick={onClickBackdrop} className="absolute z-80 inset-0 top-0 left-0 w-screen h-screen"></div>
-      <div className="relative z-50 mx-[20px] w-full md:w-fit rounded-[20px] md:mx-auto">{children}</div>
+      <div
+        onClick={onClickBackdrop}
+        className="z-80 absolute inset-0 left-0 top-0 h-screen w-screen"
+      ></div>
+      <div className="relative z-50 mx-[20px] w-full rounded-[20px] md:mx-auto md:w-fit">
+        {children}
+      </div>
     </motion.div>
   );
 };

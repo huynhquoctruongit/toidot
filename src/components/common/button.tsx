@@ -56,7 +56,7 @@ const Button = ({
   const bottom = borderBottom[color];
   const clsPill = pills[pill];
   const base =
-    "px-[14px] py-[8px] duration-200 text-button-small relative z-10";
+    "px-[14px] py-[8px] duration-200 text-button-small relative z-10 ";
   return (
     <button
       type={type}

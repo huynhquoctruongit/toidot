@@ -23,7 +23,9 @@ export default function RootLayout({
           content="NUFqcGhVQnIydkorSWtjZm9KajdHdz090"
         />
       </head>
-      <body className={"relative h-screen " + spaceMono.className}>
+      <body
+        className={"relative h-screen overflow-hidden " + spaceMono.className}
+      >
         <UserClient>{children}</UserClient>
       </body>
     </html>
