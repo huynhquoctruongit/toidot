@@ -29,7 +29,7 @@ const borderBottom = {
 };
 
 const colorInvert = {
-  primary: "border-primary-01 bg-white",
+  primary: "border-primary-01 ",
   primary2:
     "bg-primary-02 text-primary1 hover:bg-primary-03 border-primary-01 border-[1px]",
   secondary:
@@ -40,7 +40,8 @@ const colorInvert = {
 
 const pills = {
   default: "rounded-[20px]",
-  rounded: "rounded-full",
+  roundedFull: "rounded-full",
+  rounded: "rounded",
 };
 const Button = ({
   color = "primary",

@@ -50,17 +50,17 @@ const Modal = ({
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "unset";
     }
     const handleKeyDown = (e: any) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" || e.key === "Esc") {
         setOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
   if (typeof window === "undefined") return null;

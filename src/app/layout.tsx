@@ -4,10 +4,12 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "./globals.css";
 import "dayjs/locale/vi";
+import Image from "next/image";
 
 const spaceMono = Space_Mono({
-  subsets: ["latin", "vietnamese"],
+  subsets: ["latin"],
   weight: ["400", "700"],
+  style: ["italic", "normal"],
 });
 
 export default function RootLayout({
@@ -23,9 +25,19 @@ export default function RootLayout({
           content="NUFqcGhVQnIydkorSWtjZm9KajdHdz090"
         />
       </head>
-      <body
-        className={"relative h-screen overflow-hidden " + spaceMono.className}
-      >
+
+      <body className={"relative min-h-screen " + spaceMono.className}>
+        <div className="absolute bottom-0 left-0 right-0 top-0 object-contain">
+          <Image
+            src="/images/image 12.png"
+            alt="logo"
+            width={1000}
+            height={1000}
+            priority
+            quality={100}
+            className="h-full w-full object-cover"
+          />
+        </div>
         <UserClient>{children}</UserClient>
       </body>
     </html>

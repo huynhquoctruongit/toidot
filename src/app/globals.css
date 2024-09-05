@@ -1041,6 +1041,16 @@ input[type="range"] {
   );
 }
 
+.text-gradient-1 {
+  background: linear-gradient(
+    90deg,
+    rgba(24, 142, 126, 1) 0%,
+    rgba(34, 100, 92, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .btn-bem {
   background: rgb(250, 147, 130);
   background: linear-gradient(
@@ -1098,4 +1108,20 @@ input[type="range"] {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.btn-secondary {
+  background: #de543d;
+}
+.btn-primary {
+  background: #226960;
+}
+
+.bg-gradient-basic {
+  background: rgb(255, 243, 241);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 243, 241, 1) 0%,
+    rgba(255, 250, 249, 1) 100%
+  );
 }

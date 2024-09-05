@@ -3,24 +3,18 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import Button from "@/components/common/button";
 import { FacebookIcon, GoogleIcon } from "@/components/icons";
+import Modal from "@/components/modal";
 
-export default function Login({
-  setLogin,
-}: {
-  setLogin: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+type IProps = {
+  isOpen: boolean;
+  setOpen: VoidFunction;
+};
+
+export default function Login({ isOpen, setOpen }: IProps) {
   return (
-    <div
-      className="login absolute left-0 top-0 z-20 size-full bg-[#226960] bg-opacity-20"
-      onClick={(event) => {
-        setLogin(!event);
-      }}
-    >
+    <Modal isOpen={isOpen} setOpen={setOpen}>
       <div className="form-login relative z-30 flex size-full items-center justify-center">
-        <form
-          className="w-[416px] rounded-[6px] bg-white p-6"
-          onClick={(event) => event.stopPropagation()}
-        >
+        <form className="w-[416px] rounded-[6px] bg-white p-6">
           <div className="title-form text-center text-[20px] font-bold uppercase">
             đăng nhập
           </div>
@@ -79,6 +73,6 @@ export default function Login({
           </div>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 }

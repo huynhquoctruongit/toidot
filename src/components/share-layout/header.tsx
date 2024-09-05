@@ -3,38 +3,27 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "../common/button";
-import { Input } from "@/components/ui/input";
-import { FacebookIcon, GoogleIcon } from "../icons";
+
 import Register from "../sections/auth/register";
 import Login from "../sections/auth/login";
+import { useBoolean } from "@/app/hook/use-boolean";
 
 const Header = () => {
   const [active, setActive] = useState(false);
-  const [login, setLogin] = useState(false);
-  const [register, setRegister] = useState(false);
+
+  const login = useBoolean();
+  const register = useBoolean();
 
   useEffect(() => {
     setTimeout(() => {
       setActive(true);
-    }, 2000);
+    }, 5000);
   }, []);
 
   return (
     <>
-      <div className="absolute left-0 top-0 size-full">
-        <Image
-          src="/images/image 12.png"
-          alt="logo"
-          width={1000}
-          height={1000}
-          priority
-          quality={100}
-          className="h-full w-full object-cover"
-        />
-      </div>
-
-      <header className="container sticky left-0 top-0 mx-auto w-full py-4">
-        <div className="relative flex items-center justify-between">
+      <header className="container mx-auto flex w-full items-center py-3">
+        <div className="relative flex size-full items-center justify-between">
           <Link href="/" className="logo-item">
             <Image
               src="/images/Group 161.png"
@@ -53,7 +42,7 @@ const Header = () => {
                 type="button"
                 className="rounded-md bg-[#2B2B2B] bg-opacity-10 text-[14px]"
                 onClick={() => {
-                  setRegister(true);
+                  register.onTrue();
                 }}
               >
                 <div className="text-black">Đăng ký</div>
@@ -63,7 +52,7 @@ const Header = () => {
                 type="button"
                 className="ml-3 rounded-md bg-[#2B2B2B] bg-opacity-10 text-[14px]"
                 onClick={() => {
-                  setLogin(true);
+                  login.onTrue();
                 }}
               >
                 <div className="text-black">Đăng nhập</div>
@@ -99,9 +88,18 @@ const Header = () => {
           )}
         </div>
       </header>
-
-      {register && <Register setRegister={setRegister} />}
-      {login && <Login setLogin={setLogin} />}
+      <Register
+        isOpen={register.value}
+        setOpen={() => {
+          register.onFalse();
+        }}
+      />
+      <Login
+        isOpen={login.value}
+        setOpen={() => {
+          login.onFalse();
+        }}
+      />
     </>
   );
 };

@@ -5,6 +5,7 @@ import { SWRConfig } from "swr";
 import Footer from "../share-layout/footer";
 import ToastProvider from "../../context/toast";
 import Header from "../share-layout/header";
+import Image from "next/image";
 
 const Wrap = ({ children }: any) => {
   useEffect(() => {
@@ -32,7 +33,7 @@ const Wrap = ({ children }: any) => {
     >
       <ToastProvider>
         <Header />
-        <div className="relative z-[1] h-full">{children}</div>
+        {children}
       </ToastProvider>
     </SWRConfig>
   );

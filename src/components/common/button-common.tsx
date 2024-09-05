@@ -42,7 +42,7 @@ const ButtonCommon = ({
   icon,
   onClick,
 }: IButtonCommon) => {
-  const base = "text-white text-right relative px-4 py-4 w-[200px]";
+  const base = "text-white text-right relative px-4 py-4 max-w-[200px]";
 
   return (
     <button
