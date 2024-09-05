@@ -210,7 +210,7 @@ export default function BasicTopic() {
                     type="button"
                     invert
                     pill="rounded"
-                    className="btn-secondary"
+                    className="btn-secondary1"
                   >
                     <div className="text-3xl font-bold text-white">1</div>
                   </Button>

@@ -40,7 +40,7 @@ export default function SectionHome() {
             <Button
               invert
               type="button"
-              className="background-gradient-1 flex items-center px-4 text-white"
+              className="background-gradient-1 flex items-center px-4 text-base text-white"
               onClick={() => {
                 router.push("/learning-path");
               }}
@@ -55,7 +55,7 @@ export default function SectionHome() {
 
           <div className="list-btn">
             <div className="btn-see-number-student-learn grid grid-flow-col gap-10">
-              <ButtonCommon color="primary">
+              <ButtonCommon color="primary" className="w-[200px]">
                 <Grid2x2Check className="size-6 bg-transparent stroke-[1.5] text-[#226960] opacity-40" />
                 <div className="text-2xl font-bold leading-9">291 bạn</div>
                 <div className="leading-6">
@@ -64,14 +64,14 @@ export default function SectionHome() {
                 </div>
               </ButtonCommon>
 
-              <ButtonCommon color="secondary">
+              <ButtonCommon color="secondary" className="w-[200px]">
                 <GraduationCap className="size-6 bg-transparent stroke-[1.5] text-[#DE543D] opacity-40" />
                 <div className="leading-6">Hôm nay có</div>
                 <div className="text-2xl font-bold leading-9">200</div>
                 <div className="leading-6">bài tập đã làm</div>
               </ButtonCommon>
 
-              <ButtonCommon color="success">
+              <ButtonCommon color="success" className="w-[200px]">
                 <BookA className="size-6 bg-transparent stroke-[1.5] text-[#DE543D] opacity-40" />
                 <div className="leading-6">Kho từ vựng</div>
                 <div className="text-2xl font-bold leading-9">
@@ -81,7 +81,7 @@ export default function SectionHome() {
                 <div className="leading-6">làm tẹt ga giường</div>
               </ButtonCommon>
 
-              <ButtonCommon color="danger">
+              <ButtonCommon color="danger" className="w-[200px]">
                 <NotebookText className="size-6 bg-transparent stroke-[1.5] text-[#226960] opacity-40" />
                 <div className="leading-6">Nhiều phương pháp</div>
                 <div className="text-2xl font-bold leading-9">ĐỘC LẠ</div>
@@ -132,7 +132,7 @@ export default function SectionHome() {
         <div className="absolute top-[60%] size-[90%] rounded-[100%] bg-[#56BEB0] bg-opacity-5"></div>
       </div>
 
-      <div className="icon-see z-2 absolute left-2/4 top-2/4 h-[719px] w-[910px] -translate-x-2/4 -translate-y-2/4">
+      <div className="icon-see absolute left-2/4 top-2/4 h-[719px] w-[910px] -translate-x-2/4 -translate-y-2/4">
         <div className="icon relative size-full">
           <div className="absolute left-0 top-0">
             <BoomBox className="size-20 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />

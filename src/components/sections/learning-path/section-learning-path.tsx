@@ -38,7 +38,7 @@ export default function SectionLearningPath() {
                 type="button"
                 invert
                 pill="rounded"
-                className="btn-secondary"
+                className="btn-secondary1"
               >
                 <div className="text-3xl font-bold text-white">1</div>
               </Button>
@@ -121,7 +121,7 @@ export default function SectionLearningPath() {
                 type="button"
                 invert
                 pill="rounded"
-                className="btn-primary"
+                className="btn-primary1"
               >
                 <div className="text-3xl font-bold text-white">2</div>
               </Button>
