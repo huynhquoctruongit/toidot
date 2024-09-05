@@ -8,7 +8,9 @@ type IColor =
   | "warning"
   | "info";
 
-type IPill = "default" | "rounded";
+type IPill = "default" | "rounded" | "roundedFull";
+
+type ISpaceSides = "default" | "space" | "spaceSm";
 
 interface IButtonCommon {
   color?: IColor;
@@ -16,6 +18,7 @@ interface IButtonCommon {
   children: string | any;
   className?: string;
   pill?: IPill;
+  spaceSide?: ISpaceSides;
   onClick?: (...arg: any) => void;
 }
 
@@ -31,7 +34,14 @@ const colors = {
 
 const pills = {
   default: "rounded-[10px]",
-  rounded: "rounded-full",
+  rounded: "rounded",
+  roundedFull: "rounded-full",
+};
+
+const spaceSides = {
+  default: "px-4 py-4",
+  space: "py-2 px-4",
+  spaceSm: "px-4 py-2",
 };
 
 const ButtonCommon = ({
@@ -40,13 +50,14 @@ const ButtonCommon = ({
   className,
   pill = "default",
   icon,
+  spaceSide = "default",
   onClick,
 }: IButtonCommon) => {
-  const base = "text-white text-right relative px-4 py-4 max-w-[200px]";
+  const base = "text-white text-right relative  max-w-[200px]";
 
   return (
     <button
-      className={`${base} ${colors[color]} ${pills[pill]} ${className} `}
+      className={`${base} ${colors[color]} ${pills[pill]} ${spaceSides[spaceSide]} ${className} `}
       onClick={onClick}
     >
       {icon}

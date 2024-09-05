@@ -7,6 +7,7 @@ import Button from "../common/button";
 import Register from "../sections/auth/register";
 import Login from "../sections/auth/login";
 import { useBoolean } from "@/app/hook/use-boolean";
+import ButtonSpotlight from "../common/button-spotlight";
 
 const Header = () => {
   const [active, setActive] = useState(false);
@@ -61,17 +62,19 @@ const Header = () => {
           )}
 
           {active && (
-            <div className="publish-BEM-icon flex">
-              <Button
-                invert
+            <div className="publish-BEM-icon flex items-center">
+              <ButtonSpotlight
                 type="button"
-                className="btn-bem relative text-white"
+                color="gradientPrimary"
+                pill="roundedFull"
+                className="text-white"
+                spaceSide="space"
               >
                 BEM TỪ VỰNG
-                <div className="absolute -right-3 -top-2 flex size-6 items-center justify-center rounded-full bg-white shadow">
-                  <div className="text-[10px] text-black">99+</div>
+                <div className="absolute -right-1 -top-2 flex size-6 items-center justify-center rounded-full bg-white shadow">
+                  <div className="w-fit text-[10px] text-black">99+</div>
                 </div>
-              </Button>
+              </ButtonSpotlight>
 
               <div className="img ml-9">
                 <Image

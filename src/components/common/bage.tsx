@@ -12,7 +12,7 @@ const Bage = ({ color = "teritary-06", children, className }: BageProps) => {
   const colorClass = colors[color];
   return (
     <div
-      className={`flex items-center border rounded-full w-fit caption p-2 ${colorClass} ${className}`}
+      className={`caption flex w-fit items-center rounded-full border p-2 ${colorClass} ${className}`}
     >
       {children}
     </div>

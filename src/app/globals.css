@@ -1126,3 +1126,34 @@ input[type="range"] {
     rgba(255, 250, 249, 1) 100%
   );
 }
+
+.gradient-secondary {
+  background: rgb(24, 142, 126);
+  background: linear-gradient(
+    90deg,
+    rgba(24, 142, 126, 1) 0%,
+    rgba(34, 100, 92, 1) 100%
+  );
+}
+
+.gradient-primary {
+  background: rgb(250, 147, 130);
+  background: linear-gradient(
+    90deg,
+    rgba(250, 147, 130, 1) 0%,
+    rgba(229, 98, 77, 1) 100%
+  );
+}
+.gradient-success {
+  background: rgb(255, 247, 246);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 247, 246, 1) 0%,
+    rgba(255, 246, 244, 1) 100%
+  );
+}
+
+.gradient-light {
+  background: #f5f5f5;
+  opacity: 0.5;
+}

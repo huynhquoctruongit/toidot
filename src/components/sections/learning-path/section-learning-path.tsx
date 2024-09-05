@@ -3,6 +3,8 @@ import React from "react";
 
 import Button from "@/components/common/button";
 import { useRouter } from "next/navigation";
+import ButtonSpotlight from "@/components/common/button-spotlight";
+import ButtonCommon from "@/components/common/button-common";
 
 export default function SectionLearningPath() {
   const router = useRouter();
@@ -34,28 +36,29 @@ export default function SectionLearningPath() {
         <div className="basic-topic grid gap-3">
           <div className="title-basic flex items-center justify-between">
             <div className="flex items-center">
-              <Button
-                type="button"
-                invert
+              <ButtonCommon
                 pill="rounded"
                 className="btn-secondary1"
+                spaceSide="space"
               >
                 <div className="text-3xl font-bold text-white">1</div>
-              </Button>
+              </ButtonCommon>
               <div className="ml-10 text-xl font-bold uppercase">
                 Chủ đề cơ bản
               </div>
             </div>
-            <Button
-              invert
+            <ButtonSpotlight
               type="button"
-              className="btn-bem relative text-white"
+              color="gradientPrimary"
+              pill="roundedFull"
+              className="text-[14px] text-white"
+              spaceSide="default"
               onClick={() => {
                 router.push("/learning-path/basic-topic");
               }}
             >
               Bắt đầu học
-            </Button>
+            </ButtonSpotlight>
           </div>
 
           <div className="grid grid-cols-3 bg-white text-base">
@@ -117,25 +120,26 @@ export default function SectionLearningPath() {
         <div className="popular-topics grid gap-3">
           <div className="title-basic flex items-center justify-between">
             <div className="flex items-center">
-              <Button
-                type="button"
-                invert
+              <ButtonCommon
                 pill="rounded"
                 className="btn-primary1"
+                spaceSide="space"
               >
                 <div className="text-3xl font-bold text-white">2</div>
-              </Button>
+              </ButtonCommon>
               <div className="ml-10 text-xl font-bold uppercase">
                 Chủ đề thông dụng
               </div>
             </div>
-            <Button
-              invert
+            <ButtonSpotlight
               type="button"
-              className="btn-bem relative text-white"
+              color="gradientPrimary"
+              pill="roundedFull"
+              className="text-[14px] text-white"
+              spaceSide="default"
             >
               Bắt đầu học
-            </Button>
+            </ButtonSpotlight>
           </div>
 
           <div className="grid grid-cols-3 bg-white text-base">

@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/common/button";
 import ButtonCommon from "@/components/common/button-common";
+import ButtonSpotlight from "@/components/common/button-spotlight";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import {
   BookA,
@@ -37,17 +38,19 @@ export default function SectionHome() {
             Lấy lại căn bản tiếng anh hoàn toàn miễn phí
           </div>
           <div>
-            <Button
-              invert
+            <ButtonSpotlight
               type="button"
-              className="background-gradient-1 flex items-center px-4 text-base text-white"
+              color="gradientSecondary"
+              pill="roundedFull"
+              spaceSide="space"
+              className="flex items-center justify-center text-white"
               onClick={() => {
                 router.push("/learning-path");
               }}
             >
               Luyện tập ngay
               <PlayIcon className="ml-2 h-5 w-5" />
-            </Button>
+            </ButtonSpotlight>
           </div>
           <div className="text-[20px] font-bold text-[#2e2e2e] opacity-80">
             BẠN KHÔNG MỘT MÌNH

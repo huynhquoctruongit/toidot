@@ -8,6 +8,8 @@ import ModalChooseTopic from "./modal-choose-topic";
 import ModalChooseDetail from "./modal-choose-detail";
 import ModalChooseDoing from "./modal-choose-doing";
 import ModalChooseDoingAnswerSuccess from "./modal-choose-doing-answer-success";
+import ButtonSpotlight from "@/components/common/button-spotlight";
+import ButtonCommon from "@/components/common/button-common";
 
 type ISelectionChoose = {
   id: string | number;
@@ -206,14 +208,13 @@ export default function BasicTopic() {
             <div className="col-span-2">
               <div className="grid gap-8">
                 <div className="flex items-center">
-                  <Button
-                    type="button"
-                    invert
+                  <ButtonCommon
                     pill="rounded"
                     className="btn-secondary1"
+                    spaceSide="space"
                   >
                     <div className="text-3xl font-bold text-white">1</div>
-                  </Button>
+                  </ButtonCommon>
                   <div className="ml-10 text-xl font-bold uppercase">
                     Chủ đề cơ bản
                   </div>
@@ -224,16 +225,18 @@ export default function BasicTopic() {
                   ăn, hỏi đường, và tham gia các cuộc trò chuyện đơn giản.
                 </div>
                 <div>
-                  <Button
-                    invert
+                  <ButtonSpotlight
                     type="button"
-                    className="btn-bem relative text-white"
+                    color="gradientPrimary"
+                    pill="roundedFull"
+                    spaceSide="space"
                     onClick={() => {
                       active.onTrue();
                     }}
+                    className="text-white"
                   >
                     Luyện tập ngay
-                  </Button>
+                  </ButtonSpotlight>
                 </div>
               </div>
             </div>
@@ -254,9 +257,10 @@ export default function BasicTopic() {
         <div className="content-bottom container mx-auto my-6 grid gap-6">
           <div className="selection-grammar-vocabulary flex justify-center">
             <div className="bg-whiteborder grid max-w-80 grid-flow-col items-center gap-3 rounded-full border border-dashed p-2">
-              <Button
-                invert
-                className="selection-vocabulary flex items-center rounded-full bg-[#2E2E2E] bg-opacity-20 p-2"
+              <ButtonSpotlight
+                color="gradientSuccess"
+                pill="roundedFull"
+                spaceSide="spaceSm"
               >
                 <Image
                   src="/images/notebook.png"
@@ -267,11 +271,12 @@ export default function BasicTopic() {
                   quality={100}
                   className="flex object-cover"
                 />
-                <div className="ml-2 text-base">Từ vựng</div>
-              </Button>
-              <Button
-                invert
-                className="selection-grammar flex items-center rounded-full bg-[#2E2E2E] bg-opacity-20 p-2 text-[#2E2E2E] text-opacity-80"
+                <div className="ml-2">Từ vựng</div>
+              </ButtonSpotlight>
+              <ButtonSpotlight
+                color="gradientLight"
+                pill="roundedFull"
+                spaceSide="spaceSm"
               >
                 <Image
                   src="/images/notebook.png"
@@ -282,17 +287,18 @@ export default function BasicTopic() {
                   quality={100}
                   className="flex object-cover"
                 />
-                <div className="ml-2 text-base">Ngữ pháp</div>
-              </Button>
+                <div className="ml-2">Ngữ pháp</div>
+              </ButtonSpotlight>
             </div>
           </div>
 
           <div className="selection-choose flex max-w-full flex-wrap gap-4">
             {selectionChoose.map((item) => (
-              <Button
-                invert
+              <ButtonSpotlight
                 key={item.id}
-                className={`flex items-center border ${item.id === 1 ? "background-gradient-1 text-white" : "bg-white"}`}
+                pill="roundedFull"
+                spaceSide="space"
+                className={`flex items-center border ${item.id === 1 ? "gradient-secondary text-white" : "bg-white"}`}
               >
                 <div className="text-base">{item.title}</div>
                 <div className="icon-check-loading ml-2">
@@ -307,7 +313,7 @@ export default function BasicTopic() {
                     <Loader2 className="size-4 text-[#25A28D]" />
                   )}
                 </div>
-              </Button>
+              </ButtonSpotlight>
             ))}
           </div>
 
@@ -320,16 +326,18 @@ export default function BasicTopic() {
                 </div>
               </div>
               <div>
-                <Button
-                  invert
+                <ButtonSpotlight
                   type="button"
-                  className="btn-bem relative text-white"
+                  color="gradientPrimary"
+                  pill="roundedFull"
+                  spaceSide="default"
                   onClick={() => {
                     doing.onTrue();
                   }}
+                  className="text-[14px] text-white"
                 >
                   Luyện tập
-                </Button>
+                </ButtonSpotlight>
               </div>
             </div>
             <div className="learning-bottom grid grid-cols-4 gap-6">

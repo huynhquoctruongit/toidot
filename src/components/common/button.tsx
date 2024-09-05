@@ -11,7 +11,6 @@ interface IButton {
   onClick?: (...arg: any) => void;
   invert?: boolean;
   type?: "button" | "submit" | "reset";
-  icon?: any;
 }
 
 const colors = {
@@ -29,7 +28,7 @@ const borderBottom = {
 };
 
 const colorInvert = {
-  primary: "border-primary-01 ",
+  primary: "border-primary-01 bg-white",
   primary2:
     "bg-primary-02 text-primary1 hover:bg-primary-03 border-primary-01 border-[1px]",
   secondary:
@@ -40,8 +39,7 @@ const colorInvert = {
 
 const pills = {
   default: "rounded-[20px]",
-  roundedFull: "rounded-full",
-  rounded: "rounded",
+  rounded: "rounded-full",
 };
 const Button = ({
   color = "primary",
@@ -51,21 +49,18 @@ const Button = ({
   onClick = () => {},
   invert = false,
   pill = "default",
-  icon,
 }: IButton) => {
   const clsColor = !invert ? colors[color] : colorInvert[color];
   const bottom = borderBottom[color];
   const clsPill = pills[pill];
-  const base =
-    "px-[14px] py-[8px] duration-200 text-button-small relative z-10 ";
+  const base = "px-4 py-[8px] duration-200 text-button-small relative z-10";
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`${base} ${clsColor} ${clsPill} ${className} `}
+      className={`${base} ${clsColor} ${clsPill} ${className}`}
     >
       {children}
-      {icon}
     </button>
   );
 };
