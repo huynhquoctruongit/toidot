@@ -132,7 +132,7 @@ export default function SectionHome() {
         <div className="absolute top-[60%] size-[90%] rounded-[100%] bg-[#56BEB0] bg-opacity-5"></div>
       </div>
 
-      <div className="icon-see absolute left-2/4 top-2/4 z-[-1] h-[719px] w-[910px] -translate-x-2/4 -translate-y-2/4">
+      <div className="icon-see z-2 absolute left-2/4 top-2/4 h-[719px] w-[910px] -translate-x-2/4 -translate-y-2/4">
         <div className="icon relative size-full">
           <div className="absolute left-0 top-0">
             <BoomBox className="size-20 bg-transparent stroke-[0.4] text-[#000000] opacity-10" />
