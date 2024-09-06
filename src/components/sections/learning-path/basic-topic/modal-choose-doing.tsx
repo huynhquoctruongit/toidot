@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import Modal from "@/components/modal";
 import { Loader2, Volume2 } from "lucide-react";
 import Image from "next/image";
+import Progress from "@/components/common/progress";
 
 type IChooseDoing = {
   id: string | number;
@@ -55,12 +56,7 @@ export default function ModalChooseDoing({
             <div className="progress-timing">
               {/* Progress content */}
 
-              <div className="relative text-center text-[#25A28D]">
-                <Loader2 className="size-14" />
-                <div className="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4">
-                  10
-                </div>
-              </div>
+              <Progress />
             </div>
           </div>
           <div className="thumbnail grid grid-flow-col gap-10">

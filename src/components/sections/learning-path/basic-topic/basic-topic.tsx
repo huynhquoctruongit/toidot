@@ -83,7 +83,7 @@ export default function BasicTopic() {
           <div className="selection-vocabulary-grammar flex justify-center">
             <div className="bg-whiteborder grid max-w-80 grid-flow-col items-center gap-3 rounded-full border border-dashed p-2">
               <ButtonSpotlight
-                color="gradientSuccess"
+                color={vocab ? "gradientSuccess" : "gradientLight"}
                 pill="roundedFull"
                 spaceSide="spaceSm"
                 onClick={() => {
@@ -103,12 +103,10 @@ export default function BasicTopic() {
               </ButtonSpotlight>
 
               <ButtonSpotlight
-                color="gradientLight"
+                color={vocab ? "gradientLight" : "gradientSuccess"}
                 pill="roundedFull"
                 spaceSide="spaceSm"
                 onClick={() => {
-                  console.log(vocab);
-
                   setVocab(false);
                 }}
               >

@@ -1009,7 +1009,7 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-input[type="range"] {
+/* input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -1019,7 +1019,7 @@ input[type="range"] {
   border-radius: 16px;
   position: absolute;
   transition: 0.4s;
-}
+} */
 
 #rangevalue {
   text-align: center;
@@ -1156,4 +1156,26 @@ input[type="range"] {
 .gradient-light {
   background: #f5f5f5;
   opacity: 0.5;
+}
+
+/* code progress chart */
+.app1 {
+  --color1: #12c2e9;
+  --color2: #c471ed;
+  --color3: #f64f59;
+}
+
+.circle-backgroud {
+  fill: none;
+  stroke: #ddd;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: #226960;
+}
+.circle-text {
+  font-size: 16px;
+  font-weight: bold;
+  fill: #226960;
 }
