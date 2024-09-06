@@ -30,7 +30,7 @@ export default function SectionHome() {
 
   return (
     <>
-      <div className="content relative h-[calc(100vh-68px)] overflow-hidden">
+      <div className="content relative h-[calc(100vh-76px)] overflow-hidden">
         <div className="flex h-full flex-col items-center justify-between">
           <div className="text-[20px]">Chào mừng cậu đến với</div>
           <div className="text-[40px] font-bold text-[#2b2b2b]">Tôi dốt</div>

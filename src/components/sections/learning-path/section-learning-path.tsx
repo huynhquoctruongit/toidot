@@ -10,8 +10,8 @@ export default function SectionLearningPath() {
   const router = useRouter();
 
   return (
-    <div className="content container relative mx-auto">
-      <div className="grid gap-10 px-40 pb-40">
+    <div className="content container mx-auto">
+      <div className="relative grid gap-10 px-40 pb-40">
         <div className="title-learning-path text-center text-2xl font-bold leading-9">
           LỘ TRÌNH HỌC TỪ VỰNG CỦA CHÚNG MÌNH
         </div>

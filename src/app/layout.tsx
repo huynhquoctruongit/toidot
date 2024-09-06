@@ -12,6 +12,12 @@ const spaceMono = Space_Mono({
   style: ["italic", "normal"],
 });
 
+const background = {
+  backgroundImage: `url("/images/image 12.png")`,
+  backgroundRepeat: "repeat",
+  backgroundSize: "contain",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,18 +32,10 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={"relative min-h-screen " + spaceMono.className}>
-        <div className="absolute bottom-0 left-0 right-0 top-0 object-contain">
-          <Image
-            src="/images/image 12.png"
-            alt="logo"
-            width={1000}
-            height={1000}
-            priority
-            quality={100}
-            className="h-full w-full object-cover"
-          />
-        </div>
+      <body
+        className={"relative min-h-screen " + spaceMono.className}
+        style={background}
+      >
         <UserClient>{children}</UserClient>
       </body>
     </html>

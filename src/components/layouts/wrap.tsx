@@ -2,10 +2,8 @@
 import { fetcherClient } from "@/lib/api/axios-client";
 import { useEffect } from "react";
 import { SWRConfig } from "swr";
-import Footer from "../share-layout/footer";
 import ToastProvider from "../../context/toast";
 import Header from "../share-layout/header";
-import Image from "next/image";
 
 const Wrap = ({ children }: any) => {
   useEffect(() => {
