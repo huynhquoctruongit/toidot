@@ -30,7 +30,7 @@ export default function SectionHome() {
 
   return (
     <>
-      <div className="content relative h-[calc(100vh-76px)] overflow-hidden">
+      <div className="content relative z-10 h-[calc(100vh-76px)]">
         <div className="flex h-full flex-col items-center justify-between">
           <div className="text-[20px]">Chào mừng cậu đến với</div>
           <div className="text-[40px] font-bold text-[#2b2b2b]">Tôi dốt</div>
@@ -132,7 +132,7 @@ export default function SectionHome() {
             </div>
           </div>
         </div>
-        <div className="absolute top-[60%] size-[90%] rounded-[100%] bg-[#56BEB0] bg-opacity-5"></div>
+        <div className="absolute top-[60%] z-[-1] size-[90%] rounded-[100%] bg-[#56BEB0] bg-opacity-5"></div>
       </div>
 
       <div className="icon-see absolute left-2/4 top-2/4 h-[719px] w-[910px] -translate-x-2/4 -translate-y-2/4">
