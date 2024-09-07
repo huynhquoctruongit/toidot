@@ -13,7 +13,7 @@ import ButtonCommon from "@/components/common/button-common";
 import VocabularyChoose from "./vocabulary/vocabulary-choose";
 import GrammarChoose from "./grammar/grammar-choose";
 
-export default function BasicTopic({ topic }: any) {
+export default function LearningTopic({ topic }: any) {
   const [vocab, setVocab] = useState<boolean>(true);
 
   const comfirmTopic = useBoolean();

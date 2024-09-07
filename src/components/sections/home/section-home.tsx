@@ -45,7 +45,7 @@ export default function SectionHome() {
               spaceSide="space"
               className="flex items-center justify-center text-white"
               onClick={() => {
-                router.push("/learning-path");
+                router.push("/learning-collection");
               }}
             >
               Luyện tập ngay

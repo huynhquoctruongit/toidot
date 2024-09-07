@@ -1,4 +1,4 @@
-import BasicTopic from "@/components/sections/learning-path/basic-topic/basic-topic";
+import LearningTopic from "@/components/sections/learning-collection/learning-topic/learning-topic";
 import AxiosClient from "@/lib/api/axios-client";
 import axios from "axios";
 import { Metadata } from "next";
@@ -22,5 +22,5 @@ export default async function BasicTopicPage({
     )
   ).data;
 
-  return <BasicTopic topic={topic.data} />;
+  return <LearningTopic topic={topic.data} />;
 }

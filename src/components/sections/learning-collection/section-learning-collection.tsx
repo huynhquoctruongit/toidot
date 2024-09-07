@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 
-export default function SectionLearningPath({ collection, word }: any) {
+export default function SectionLearningCollection({ collection, word }: any) {
   const collectionMapWord = collection?.map((item: any) => {
     const wordTopic = word?.filter((w: any) => item?.id === w?.topic);
     return { ...item, word: wordTopic };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import SectionLearningPath from "@/components/sections/learning-path/section-learning-path";
+import SectionLearningCollection from "@/components/sections/learning-collection/section-learning-collection";
 import AxiosClient from "@/lib/api/axios-client";
 
 export const metadata: Metadata = {
@@ -13,5 +13,7 @@ export default async function LearningPathPage() {
   const collection = (await AxiosClient.get("/items/collection?fields=*")).data;
   const word = (await AxiosClient.get("/items/word?fields=*")).data;
 
-  return <SectionLearningPath collection={collection.data} word={word.data} />;
+  return (
+    <SectionLearningCollection collection={collection.data} word={word.data} />
+  );
 }
