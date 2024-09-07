@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-
 import { useBoolean } from "@/app/hook/use-boolean";
 import ModalChooseTopic from "./modal-choose-topic";
 import ModalChooseDetail from "./modal-choose-detail";
@@ -12,8 +11,24 @@ import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 import VocabularyChoose from "./vocabulary/vocabulary-choose";
 import GrammarChoose from "./grammar/grammar-choose";
+import { optionsFetch } from "@/lib/api/axios-client";
+import useSWR from "swr";
+import { ITopic } from "@/types/topic";
 
-export default function LearningTopic({ topic }: any) {
+type IProps = {
+  topic: ITopic[];
+};
+
+export default function LearningTopic({ topic }: IProps) {
+  const filterId = topic.map((item: any) => item.id);
+
+  const [active, setActive] = useState(filterId[0]);
+
+  const { data } = useSWR(
+    `/items/word?fields=*.*&filter[topic][_eq]=${active}`,
+    optionsFetch,
+  );
+
   const [vocab, setVocab] = useState<boolean>(true);
 
   const comfirmTopic = useBoolean();
@@ -23,10 +38,6 @@ export default function LearningTopic({ topic }: any) {
   const doing = useBoolean();
 
   const doingAnswerSuccess = useBoolean();
-
-  const filterId = topic.map((item: any) => item.id);
-
-  const [active, setActive] = useState(filterId[0]);
 
   const handleActiveId = (id: number) => {
     setActive(id);
@@ -142,6 +153,11 @@ export default function LearningTopic({ topic }: any) {
               topic={topic}
               active={active}
               onClick={handleActiveId}
+              wordTopic={data}
+              isOpen={detail.value}
+              setOpen={() => {
+                detail.onFalse();
+              }}
             />
           ) : (
             <GrammarChoose />
@@ -160,15 +176,6 @@ export default function LearningTopic({ topic }: any) {
         onClick={handleActiveId}
       />
 
-      {/* ModalChooseDetail */}
-      <ModalChooseDetail
-        isOpen={detail.value}
-        setOpen={() => {
-          detail.onFalse();
-        }}
-      />
-
-      {/* ModalChooseDoing */}
       {/* <ModalChooseDoing
         isOpen={doing.value}
         setOpen={() => {

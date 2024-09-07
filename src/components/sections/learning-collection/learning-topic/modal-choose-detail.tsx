@@ -6,9 +6,14 @@ import { ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
+  itemWord?: any;
 };
 
-export default function ModalChooseDetail({ isOpen, setOpen }: IProps) {
+export default function ModalChooseDetail({
+  isOpen,
+  setOpen,
+  itemWord,
+}: IProps) {
   return (
     <Modal isOpen={isOpen} setOpen={setOpen} className="choose-detail">
       <div className="max-w-[600px] rounded-[10px] border-[10px] border-[#F5F5F5] bg-white p-3">
@@ -16,11 +21,11 @@ export default function ModalChooseDetail({ isOpen, setOpen }: IProps) {
           <div className="vocabulary-grammar-thumnail grid grid-flow-col items-center gap-3">
             <div className="vocabulary-grammar flex flex-col gap-3">
               <div className="vocabulary text-gradient-1 text-3xl font-bold">
-                Sibling
+                {itemWord.title}
               </div>
               <div className="flex items-center gap-3 text-[#226960]">
                 <div className="translate rounded-full border border-dashed p-2 text-[14px]">
-                  /ˈsɪblɪŋ/
+                  {itemWord.pronunciation}
                 </div>
                 <div className="rounded-full border border-dashed p-2">
                   <Volume2 className="size-5" />
@@ -29,7 +34,7 @@ export default function ModalChooseDetail({ isOpen, setOpen }: IProps) {
               <div className="font-bold text-[#2E2E2E] text-opacity-80">
                 Vietnamese meanings:
                 <br />
-                <span className="font-light">anh chị em ruột, anh em</span>
+                <span className="font-light">{itemWord.meanings}</span>
               </div>
             </div>
             <div className="flex items-start justify-end">
@@ -50,18 +55,14 @@ export default function ModalChooseDetail({ isOpen, setOpen }: IProps) {
               Example sentences
             </div>
             <div className="exp-translate">
-              <div className="exp font-bold text-[#2E2E2E] text-opacity-80">
-                I have two siblings, a brother and a sister.
-                <div className="exp-translate text-[14px] font-light italic">
-                  Tôi có hai anh chị em, một anh trai và một chị gái.
+              {itemWord.example_sentences.map((item: any) => (
+                <div className="exp font-bold text-[#2E2E2E] text-opacity-80">
+                  {item.en}
+                  <div className="exp-translate text-[14px] font-light italic">
+                    {item.vi}
+                  </div>
                 </div>
-              </div>
-              <div className="exp-2 font-bold text-[#2E2E2E] text-opacity-80">
-                Siblings often have a special bond.
-                <div className="exp-translate-2 text-[14px] font-light italic">
-                  Anh em thường có một mối liên kết đặc biệt.
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="btn-prev-next flex w-full justify-end gap-2">

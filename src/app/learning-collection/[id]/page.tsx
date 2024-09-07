@@ -1,5 +1,6 @@
 import LearningTopic from "@/components/sections/learning-collection/learning-topic/learning-topic";
 import AxiosClient from "@/lib/api/axios-client";
+import { ITopic } from "@/types/topic";
 import axios from "axios";
 import { Metadata } from "next";
 
@@ -16,11 +17,9 @@ export default async function BasicTopicPage({
 }) {
   const { id } = params;
 
-  const topic = (
-    await AxiosClient.get(
-      `/items/topic?fields=*.*&filter[collection][_eq]=${id}`,
-    )
-  ).data;
+  const topic: ITopic[] = await AxiosClient.get(
+    `/items/topic?fields=*.*&filter[collection][_eq]=${id}`,
+  );
 
-  return <LearningTopic topic={topic.data} />;
+  return <LearningTopic topic={topic} />;
 }

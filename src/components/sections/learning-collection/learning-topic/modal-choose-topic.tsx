@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Modal from "@/components/modal";
 import { CircleCheck, Loader2 } from "lucide-react";
 import ButtonSpotlight from "@/components/common/button-spotlight";
+import { ITopic } from "@/types/topic";
 
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
-  topic: any;
-  active: any;
+  topic: ITopic[];
+  active: number;
   onClick: (id: number) => void;
 };
 

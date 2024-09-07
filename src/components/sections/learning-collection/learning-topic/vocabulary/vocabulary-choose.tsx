@@ -5,6 +5,9 @@ import Image from "next/image";
 import { CircleCheck, Loader2, Volume2 } from "lucide-react";
 
 import ButtonSpotlight from "@/components/common/button-spotlight";
+import ModalChooseDetail from "../modal-choose-detail";
+import { IWord } from "@/types/word";
+import { ITopic } from "@/types/topic";
 
 type IChooseTable = {
   id: string | number;
@@ -104,9 +107,12 @@ const chooseTable: IChooseTable[] = [
 type IProps = {
   doingAction: VoidFunction;
   detailAction: VoidFunction;
-  topic: any;
-  active: any;
+  topic: ITopic[];
+  active: number;
   onClick: (id: number) => void;
+  wordTopic: IWord[];
+  isOpen: boolean;
+  setOpen: VoidFunction;
 };
 
 export default function VocabularyChoose({
@@ -115,7 +121,12 @@ export default function VocabularyChoose({
   topic,
   active,
   onClick,
+  wordTopic,
+  isOpen,
+  setOpen,
 }: IProps) {
+  const [activeId, setActiveId] = useState(null);
+
   return (
     <>
       <div className="selection-choose flex max-w-full flex-wrap gap-4">
@@ -169,37 +180,46 @@ export default function VocabularyChoose({
         </div>
 
         <div className="learning-bottom grid grid-cols-4 gap-6">
-          {chooseTable.map((item) => (
-            <div
-              className="cursor-pointer rounded-[8px] border"
-              key={item.id}
-              onClick={() => {
-                detailAction();
-              }}
-            >
-              <div className="grid grid-cols-3">
-                <div className="thumnail-choose-table col-span-1 flex items-center justify-center border-r bg-[#FFAA00] bg-opacity-5">
-                  <div className="p-1">
-                    <Image
-                      src={item.thumnail}
-                      alt={item.title}
-                      width={83}
-                      height={87}
-                      priority
-                      quality={100}
-                      className="flex object-cover"
-                    />
+          {(wordTopic || []).map((item: any) => (
+            <div key={item.id}>
+              <div
+                className="cursor-pointer rounded-[8px] border"
+                onClick={() => {
+                  detailAction();
+                  setActiveId(item.id);
+                }}
+              >
+                <div className="grid grid-cols-3">
+                  <div className="thumnail-choose-table col-span-1 flex items-center justify-center border-r bg-[#FFAA00] bg-opacity-5">
+                    <div className="p-1">
+                      <Image
+                        src={"/images/fan.png"}
+                        alt={item.title}
+                        width={83}
+                        height={87}
+                        priority
+                        quality={100}
+                        className="flex object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="col-span-2 ml-2 flex flex-col justify-between p-1 text-[14px] text-[#2E2E2E]">
-                  <div>
-                    <div className="uppercase opacity-80">{item.title}</div>
-                    <div className="opacity-30">{item.transcription}</div>
+                  <div className="col-span-2 ml-2 flex flex-col justify-between p-1 text-[14px] text-[#2E2E2E]">
+                    <div>
+                      <div className="uppercase opacity-80">{item.title}</div>
+                      <div className="opacity-30">{item.pronunciation}</div>
+                    </div>
+                    <div className="capitalize opacity-80">{item.meanings}</div>
                   </div>
-                  <div className="capitalize opacity-80">{item.translate}</div>
                 </div>
               </div>
+              {activeId === item.id && (
+                <ModalChooseDetail
+                  isOpen={isOpen}
+                  setOpen={setOpen}
+                  itemWord={item}
+                />
+              )}
             </div>
           ))}
         </div>
