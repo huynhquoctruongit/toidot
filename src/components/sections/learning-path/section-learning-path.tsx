@@ -1,12 +1,16 @@
 "use client";
 import React from "react";
 
-import Button from "@/components/common/button";
 import { useRouter } from "next/navigation";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 
-export default function SectionLearningPath() {
+export default function SectionLearningPath({ collection, word }: any) {
+  const collectionMapWord = collection?.map((item: any) => {
+    const wordTopic = word?.filter((w: any) => item?.id === w?.topic);
+    return { ...item, word: wordTopic };
+  });
+
   const router = useRouter();
 
   return (
@@ -32,92 +36,99 @@ export default function SectionLearningPath() {
             ChatGPT
           </div>
         </div>
-
-        <div className="basic-topic grid gap-3">
-          <div className="title-basic flex items-center justify-between">
-            <div className="flex items-center">
-              <ButtonCommon
-                pill="rounded"
-                className="btn-secondary1"
-                spaceSide="space"
-              >
-                <div className="text-3xl font-bold text-white">1</div>
-              </ButtonCommon>
-              <div className="ml-10 text-xl font-bold uppercase">
-                Chủ đề cơ bản
+        {collectionMapWord.map((item: any) => (
+          <div className="basic-topic grid gap-3" key={item.id}>
+            <div className="title-basic flex items-center justify-between">
+              <div className="flex items-center">
+                <ButtonCommon
+                  pill="rounded"
+                  className={
+                    item.id === 1
+                      ? "btn-secondary1"
+                      : item.id === 2
+                        ? "btn-primary1"
+                        : ""
+                  }
+                  spaceSide="space"
+                >
+                  <div className="text-3xl font-bold text-white">{item.id}</div>
+                </ButtonCommon>
+                <div className="ml-10 text-xl font-bold uppercase">
+                  Chủ đề {item.title}
+                </div>
               </div>
+              <ButtonSpotlight
+                type="button"
+                color="gradientPrimary"
+                pill="roundedFull"
+                className="text-[14px] text-white"
+                spaceSide="default"
+                onClick={() => {
+                  router.push(`/learning-path/${item.id}`);
+                }}
+              >
+                Bắt đầu học
+              </ButtonSpotlight>
             </div>
-            <ButtonSpotlight
-              type="button"
-              color="gradientPrimary"
-              pill="roundedFull"
-              className="text-[14px] text-white"
-              spaceSide="default"
-              onClick={() => {
-                router.push("/learning-path/basic-topic");
-              }}
-            >
-              Bắt đầu học
-            </ButtonSpotlight>
-          </div>
 
-          <div className="grid grid-cols-3 bg-white text-base">
-            <div className="content-left col-span-2 rounded-bl rounded-tl border-y border-l p-4">
-              <div className="grid gap-16">
-                <div className="top-content">
-                  <div className="btn-item flex items-center gap-1">
-                    <button className="background-gradient-1 rounded border p-2"></button>
-                    <button className="background-gradient-1 rounded border p-2"></button>
-                    <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
-                    <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
+            <div className="grid grid-cols-3 bg-white text-base">
+              <div className="content-left col-span-2 rounded-bl rounded-tl border-y border-l p-4">
+                <div className="grid gap-16">
+                  <div className="top-content">
+                    <div className="btn-item flex items-center gap-1">
+                      <button className="background-gradient-1 rounded border p-2"></button>
+                      <button className="background-gradient-1 rounded border p-2"></button>
+                      <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
+                      <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
+                    </div>
+                    <div className="opacity-50">
+                      <div>Gia đình và bạn bè: bố, mẹ, anh, chị.. </div>
+                      <div>Đồ dùng hàng ngày: bàn,ghế, bút, sách...</div>
+                      <div> Màu sắc: đỏ, xanh, vàng, trắng... </div>
+                      <div>Số đếm: một,hai, ba, bốn, v.v.</div>
+                      <div>Thời gian: ngày, tháng, năm, giờ, phút...</div>
+                    </div>
                   </div>
-                  <div className="opacity-50">
-                    <div>Gia đình và bạn bè: bố, mẹ, anh, chị.. </div>
-                    <div>Đồ dùng hàng ngày: bàn,ghế, bút, sách...</div>
-                    <div> Màu sắc: đỏ, xanh, vàng, trắng... </div>
-                    <div>Số đếm: một,hai, ba, bốn, v.v.</div>
-                    <div>Thời gian: ngày, tháng, năm, giờ, phút...</div>
+                  <div className="flex items-center text-[14px]">
+                    <div className="text-[#2e2e2e] opacity-80">Từ vựng</div>
+                    <span className="ml-3 rounded border px-1 py-[1px] font-bold">
+                      {item.word.length}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="content-right grid gap-16 rounded-br rounded-tr border p-4">
+                <div className="grid gap-3">
+                  <div className="top-content flex flex-col">
+                    <div className="flex gap-1">
+                      <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
+                      <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
+                    </div>
+                    <div>
+                      <div className="opacity-50">Hiện tại đơn</div>
+                      <li className="m text-[14px] italic">The sun is hot </li>
+                    </div>
+                    <div>
+                      <div className="opacity-50">Hiện tại tiếp diễn</div>
+                      <li className="text-[14px] italic">
+                        I’am leanrning English
+                      </li>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center text-[14px]">
                   <div className="text-[#2e2e2e] opacity-80">Từ vựng</div>
                   <span className="ml-3 rounded border px-1 py-[1px] font-bold">
-                    100
+                    {item.word.length}
                   </span>
                 </div>
               </div>
             </div>
-
-            <div className="content-right grid gap-16 rounded-br rounded-tr border p-4">
-              <div className="grid gap-3">
-                <div className="top-content flex flex-col">
-                  <div className="flex gap-1">
-                    <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
-                    <button className="rounded border bg-[#2E2E2E] p-2 opacity-20"></button>
-                  </div>
-                  <div>
-                    <div className="opacity-50">Hiện tại đơn</div>
-                    <li className="m text-[14px] italic">The sun is hot </li>
-                  </div>
-                  <div>
-                    <div className="opacity-50">Hiện tại tiếp diễn</div>
-                    <li className="text-[14px] italic">
-                      I’am leanrning English
-                    </li>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center text-[14px]">
-                <div className="text-[#2e2e2e] opacity-80">Từ vựng</div>
-                <span className="ml-3 rounded border px-1 py-[1px] font-bold">
-                  100
-                </span>
-              </div>
-            </div>
           </div>
-        </div>
+        ))}
 
-        <div className="popular-topics grid gap-3">
+        {/* <div className="popular-topics grid gap-3">
           <div className="title-basic flex items-center justify-between">
             <div className="flex items-center">
               <ButtonCommon
@@ -137,6 +148,9 @@ export default function SectionLearningPath() {
               pill="roundedFull"
               className="text-[14px] text-white"
               spaceSide="default"
+              onClick={() => {
+                router.push("/learning-path/popular-topic");
+              }}
             >
               Bắt đầu học
             </ButtonSpotlight>
@@ -196,7 +210,7 @@ export default function SectionLearningPath() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

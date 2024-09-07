@@ -6,89 +6,6 @@ import { CircleCheck, Loader2, Volume2 } from "lucide-react";
 
 import ButtonSpotlight from "@/components/common/button-spotlight";
 
-type ISelectionChoose = {
-  id: string | number;
-  title: string;
-  check?: boolean;
-  loading?: boolean;
-};
-
-const selectionChoose: ISelectionChoose[] = [
-  {
-    id: 1,
-    title: "Tất cả",
-    check: false,
-    loading: false,
-  },
-
-  {
-    id: 2,
-    title: "Động vật và thiên nhiên ",
-    check: false,
-    loading: true,
-  },
-  {
-    id: 3,
-    title: "Gia đình và bạn bè",
-    check: false,
-    loading: true,
-  },
-  {
-    id: 4,
-    title: "Ngày tháng và thời tiết",
-    check: false,
-    loading: true,
-  },
-  {
-    id: 5,
-    title: "Thực phẩm và đồ uống",
-    check: false,
-    loading: false,
-  },
-  {
-    id: 6,
-    title: "Động vật và thiên nhiên ",
-    check: true,
-    loading: false,
-  },
-  {
-    id: 8,
-    title: "Gia đình và bạn bè ",
-    check: false,
-    loading: false,
-  },
-  {
-    id: 9,
-    title: "Ngày tháng và thời tiết ",
-    check: false,
-    loading: true,
-  },
-  {
-    id: 10,
-    title: "Thực phẩm và đồ uống ",
-    check: false,
-    loading: false,
-  },
-  {
-    id: 11,
-    title: "Động vật và thiên nhiên ",
-    check: true,
-    loading: false,
-  },
-  {
-    id: 12,
-    title: "Ngày tháng và thời tiết ",
-    check: false,
-    loading: false,
-  },
-  {
-    id: 13,
-    title: "Thực phẩm và đồ uống ",
-    check: true,
-    loading: false,
-  },
-];
-
 type IChooseTable = {
   id: string | number;
   title: string;
@@ -187,29 +104,44 @@ const chooseTable: IChooseTable[] = [
 type IProps = {
   doingAction: VoidFunction;
   detailAction: VoidFunction;
+  topic: any;
+  active: any;
+  onClick: (id: number) => void;
 };
 
 export default function VocabularyChoose({
   doingAction,
   detailAction,
+  topic,
+  active,
+  onClick,
 }: IProps) {
   return (
     <>
       <div className="selection-choose flex max-w-full flex-wrap gap-4">
-        {selectionChoose.map((item) => (
+        {topic.map((item: any) => (
           <ButtonSpotlight
             key={item.id}
             pill="roundedFull"
             spaceSide="space"
-            className={`flex items-center border ${item.id === 1 ? "gradient-secondary text-white" : "bg-white"}`}
+            className={`flex items-center border ${active === item.id ? "gradient-secondary text-white" : "bg-white"}`}
+            onClick={() => {
+              onClick(item.id);
+            }}
           >
             <div className="text-base">{item.title}</div>
-            <div className="icon-check-loading ml-2">
-              {item.check && (
-                <CircleCheck className="size-5" fill="#188E7E" color="white" />
-              )}
-              {item.loading && <Loader2 className="size-4 text-[#25A28D]" />}
-            </div>
+            {(item.check || item.loading) && (
+              <div className="icon-check-loading ml-2">
+                {item.check && (
+                  <CircleCheck
+                    className="size-5"
+                    fill="#188E7E"
+                    color="white"
+                  />
+                )}
+                {item.loading && <Loader2 className="size-4 text-[#25A28D]" />}
+              </div>
+            )}
           </ButtonSpotlight>
         ))}
       </div>

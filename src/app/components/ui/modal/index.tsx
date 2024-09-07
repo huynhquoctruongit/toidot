@@ -66,7 +66,6 @@ const Content = ({
     toggle();
   };
   useEffect(() => {
-    console.log(open);
     if (open) {
       document.body.style.overflow = "hidden";
     } else {

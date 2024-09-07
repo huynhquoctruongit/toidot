@@ -14,7 +14,8 @@ AxiosClient.interceptors.response.use(function (response: any) {
 }, interceptorError);
 
 AxiosClient.interceptors.request.use(function (config: any) {
-  var token = getCookie("auth_token");
+  // var token = getCookie("auth_token");
+  const token = "07Stub9_tg5ovBTcBOBuWZKiL5KbBYfR";
   if (token) {
     config.headers.Authorization = "Bearer " + token;
   }
@@ -24,7 +25,8 @@ AxiosClient.interceptors.request.use(function (config: any) {
 export const fetcherClient = (url: any, params: any) => {
   if (url) {
     if (typeof url === "string") return AxiosClient.get(url, { params });
-    else if (typeof url === "object") return AxiosClient.get(url[0], { params: url[1] });
+    else if (typeof url === "object")
+      return AxiosClient.get(url[0], { params: url[1] });
   }
 };
 export const optionsFetch = {

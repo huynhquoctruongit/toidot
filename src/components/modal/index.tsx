@@ -22,6 +22,7 @@ const WrapModal = ({
       className="h-screen w-screen bg-[black]/10 backdrop-blur-[1px]"
     ></div>
   );
+
   return (
     <AnimatePresence>
       {isOpen && (

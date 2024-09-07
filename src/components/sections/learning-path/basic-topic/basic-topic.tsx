@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 
 import { useBoolean } from "@/app/hook/use-boolean";
@@ -13,17 +13,24 @@ import ButtonCommon from "@/components/common/button-common";
 import VocabularyChoose from "./vocabulary/vocabulary-choose";
 import GrammarChoose from "./grammar/grammar-choose";
 
-export default function BasicTopic() {
+export default function BasicTopic({ topic }: any) {
   const [vocab, setVocab] = useState<boolean>(true);
-  const [id, setId] = useState<number>(0);
 
-  const active = useBoolean();
+  const comfirmTopic = useBoolean();
 
   const detail = useBoolean();
 
   const doing = useBoolean();
 
   const doingAnswerSuccess = useBoolean();
+
+  const filterId = topic.map((item: any) => item.id);
+
+  const [active, setActive] = useState(filterId[0]);
+
+  const handleActiveId = (id: number) => {
+    setActive(id);
+  };
 
   return (
     <>
@@ -56,7 +63,7 @@ export default function BasicTopic() {
                     pill="roundedFull"
                     spaceSide="space"
                     onClick={() => {
-                      active.onTrue();
+                      comfirmTopic.onTrue();
                     }}
                     className="text-white"
                   >
@@ -132,6 +139,9 @@ export default function BasicTopic() {
               detailAction={() => {
                 detail.onTrue();
               }}
+              topic={topic}
+              active={active}
+              onClick={handleActiveId}
             />
           ) : (
             <GrammarChoose />
@@ -141,10 +151,13 @@ export default function BasicTopic() {
 
       {/* modal chooseTopic */}
       <ModalChooseTopic
-        isOpen={active.value}
+        isOpen={comfirmTopic.value}
         setOpen={() => {
-          active.onFalse();
+          comfirmTopic.onFalse();
         }}
+        topic={topic}
+        active={active}
+        onClick={handleActiveId}
       />
 
       {/* ModalChooseDetail */}
@@ -156,7 +169,7 @@ export default function BasicTopic() {
       />
 
       {/* ModalChooseDoing */}
-      <ModalChooseDoing
+      {/* <ModalChooseDoing
         isOpen={doing.value}
         setOpen={() => {
           doing.onFalse();
@@ -166,16 +179,16 @@ export default function BasicTopic() {
           doingAnswerSuccess.onTrue();
         }}
         setId={setId}
-      />
+      /> */}
 
       {/* ModalChooseDoingAnswerSuccess */}
-      <ModalChooseDoingAnswerSuccess
+      {/* <ModalChooseDoingAnswerSuccess
         isOpen={doingAnswerSuccess.value}
         setOpen={() => {
           doingAnswerSuccess.onFalse();
         }}
-        activeId={id}
-      />
+        activeactiveId={id}
+      /> */}
     </>
   );
 }
