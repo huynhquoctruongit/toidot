@@ -11,13 +11,7 @@ import { ITopic, ITopicFilters, ITopicFilterValue } from "@/types/topic";
 
 type IProps = {
   doingAction?: VoidFunction;
-  detailAction?: VoidFunction;
   topicTitle: string[];
-  active?: number;
-  onClick?: (id: number) => void;
-
-  isOpen?: boolean;
-  setOpen?: VoidFunction;
   dataFiltered: IWord[];
   filters: ITopicFilters;
   handleFilterPublish: (action: string, topic: string) => void;
@@ -26,12 +20,7 @@ type IProps = {
 //------------------------------------------
 export default function VocabularyChoose({
   doingAction,
-  detailAction,
   topicTitle,
-  active,
-  onClick,
-  isOpen,
-  setOpen,
   dataFiltered,
   filters,
   handleFilterPublish,

@@ -76,20 +76,7 @@ export default function MainLearningTopic({
         <VocabularyChoose
           filters={filters}
           handleFilterPublish={handleFilterPublish}
-          //   doingAction={() => {
-          //     doing.onTrue();
-          //   }}
-          //   detailAction={() => {
-          //     detail.onTrue();
-          //   }}
           dataFiltered={dataFiltered}
-          //   active={active}
-          //   onClick={handleActiveId}
-
-          //   isOpen={detail.value}
-          //   setOpen={() => {
-          //     detail.onFalse();
-          //   }}
           topicTitle={topicTitle}
         />
       ) : (

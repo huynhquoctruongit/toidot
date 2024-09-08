@@ -29,8 +29,6 @@ const defaultFilters: ITopicFilters = {
 export default function LearningTopic({ topics, collections, words }: IProps) {
   const activeTopic = useBoolean();
 
-  // const detail = useBoolean();
-
   // const doing = useBoolean();
 
   // const doingAnswerSuccess = useBoolean();

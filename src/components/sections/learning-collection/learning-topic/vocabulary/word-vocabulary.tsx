@@ -1,23 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { IWord } from "@/types/word";
 import ModalChooseDetail from "../modal-choose/modal-choose-detail";
+import { useBoolean } from "@/app/hook/use-boolean";
 
 type IProps = {
   wordFlowTopic: IWord[];
 };
 
 export default function WordVocabulary({ wordFlowTopic }: IProps) {
+  const activeItemWord = useBoolean();
+
+  const [idItemWord, setIdItemWord] = useState<number>();
+
   return (
     <div className="learning-bottom grid grid-cols-4 gap-6">
-      {wordFlowTopic?.map((word) => (
-        <div key={word?.id}>
+      {wordFlowTopic.map((word) => (
+        <div key={word.id}>
           <div
             className="cursor-pointer rounded-[8px] border"
             onClick={() => {
-              //   detailAction();
-              //   setActiveId(word ? word.id : Number(1));
-              console.log(word.id);
+              activeItemWord.onTrue();
+              setIdItemWord(word ? word.id : Number);
             }}
           >
             <div className="grid grid-cols-3">
@@ -44,9 +48,14 @@ export default function WordVocabulary({ wordFlowTopic }: IProps) {
               </div>
             </div>
           </div>
-          {/* {activeId === word?.id && (
-            <ModalChooseDetail isOpen={isOpen} setOpen={setOpen} itemWord={word} />
-          )} */}
+
+          {idItemWord === word.id && (
+            <ModalChooseDetail
+              isOpen={activeItemWord.value}
+              setOpen={activeItemWord.onFalse}
+              itemWord={word}
+            />
+          )}
         </div>
       ))}
     </div>
