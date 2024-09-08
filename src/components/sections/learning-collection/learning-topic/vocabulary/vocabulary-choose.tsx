@@ -5,18 +5,17 @@ import React, { useState } from "react";
 import { IWord } from "@/types/word";
 import { ITopic } from "@/types/topic";
 import HeadVocabulary from "./head-vocabulary";
-import WordVocabulary from "./word-vocabulary";
 import TabsTopic from "./tabs-topic";
 
 type IProps = {
-  doingAction: VoidFunction;
-  detailAction: VoidFunction;
-  topics: ITopic[];
-  active: number;
-  onClick: (id: number) => void;
-  wordTopic: IWord[];
-  isOpen: boolean;
-  setOpen: VoidFunction;
+  doingAction?: VoidFunction;
+  detailAction?: VoidFunction;
+  topics?: ITopic[];
+  active?: number;
+  onClick?: (id: number) => void;
+  wordTopic?: IWord[];
+  isOpen?: boolean;
+  setOpen?: VoidFunction;
 };
 
 export default function VocabularyChoose({
@@ -34,16 +33,14 @@ export default function VocabularyChoose({
   return (
     <>
       <div className="selection-choose flex max-w-full flex-wrap gap-4">
-        {topics.map((topic) => (
-          <TabsTopic topic={topic} />
-        ))}
+        {topics?.map((topic) => <TabsTopic topic={topic} />)}
       </div>
 
       <div className="table-learning grid w-full gap-4 rounded-[8px] border bg-white p-6">
-        <HeadVocabulary doingAction={doingAction} />
+        {/* <HeadVocabulary doingAction={doingAction} /> */}
 
         <div className="learning-bottom grid grid-cols-4 gap-6">
-          {(wordTopic || []).map((word) => (
+          {/* {(wordTopic || []).map((word) => (
             <WordVocabulary
               key={word.id}
               word={word}
@@ -53,7 +50,7 @@ export default function VocabularyChoose({
               setOpen={setOpen}
               activeId={activeId}
             />
-          ))}
+          ))} */}
         </div>
       </div>
 

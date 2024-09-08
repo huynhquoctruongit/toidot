@@ -22,9 +22,15 @@ export default async function BasicTopicPage({
     `/items/topic?fields=*.*&filter[collection][_eq]=${id}`,
   );
 
-  const collection: ICollection[] = await AxiosClient.get(
+  const collections: ICollection[] = await AxiosClient.get(
     `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
   );
 
-  return <LearningTopic topics={topics} collection={collection} />;
+  return (
+    <LearningTopic
+      topics={topics}
+      collections={collections}
+      idCollection={id}
+    />
+  );
 }
