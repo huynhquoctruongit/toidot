@@ -6,7 +6,9 @@ type IColor =
   | "success"
   | "danger"
   | "warning"
-  | "info";
+  | "info"
+  | "primary1"
+  | "secondary1";
 
 type IPill = "default" | "rounded" | "roundedFull";
 
@@ -30,6 +32,8 @@ const colors = {
   danger: "btn-danger",
   warning: "btn-warning",
   info: "btn-info",
+  primary1: "btn-primary1",
+  secondary1: "btn-secondary1",
 };
 
 const pills = {
