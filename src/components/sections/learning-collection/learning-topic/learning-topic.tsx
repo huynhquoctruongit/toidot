@@ -3,10 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useBoolean } from "@/app/hook/use-boolean";
-import ModalChooseTopic from "./modal-choose-topic";
-import ModalChooseDetail from "./modal-choose-detail";
-import ModalChooseDoing from "./modal-choose-doing";
-import ModalChooseDoingAnswerSuccess from "./modal-choose-doing-answer-success";
+import ModalChooseTopic from "./modal-choose/modal-choose-topic";
+
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 import VocabularyChoose from "./vocabulary/vocabulary-choose";
@@ -17,12 +15,12 @@ import { ITopic } from "@/types/topic";
 import { ICollection } from "@/types/collection";
 
 type IProps = {
-  topic: ITopic[];
+  topics: ITopic[];
   collection: ICollection[];
 };
 
-export default function LearningTopic({ topic, collection }: IProps) {
-  const filterId = topic.map((item: any) => item.id);
+export default function LearningTopic({ topics, collection }: IProps) {
+  const filterId = topics.map((item: any) => item.id);
 
   const [active, setActive] = useState(filterId[0]);
 
@@ -159,7 +157,7 @@ export default function LearningTopic({ topic, collection }: IProps) {
               detailAction={() => {
                 detail.onTrue();
               }}
-              topic={topic}
+              topics={topics}
               active={active}
               onClick={handleActiveId}
               wordTopic={data}
@@ -180,7 +178,7 @@ export default function LearningTopic({ topic, collection }: IProps) {
         setOpen={() => {
           comfirmTopic.onFalse();
         }}
-        topic={topic}
+        topics={topics}
         active={active}
         onClick={handleActiveId}
       />

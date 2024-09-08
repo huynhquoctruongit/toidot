@@ -18,7 +18,7 @@ export default async function BasicTopicPage({
 }) {
   const { id } = params;
 
-  const topic: ITopic[] = await AxiosClient.get(
+  const topics: ITopic[] = await AxiosClient.get(
     `/items/topic?fields=*.*&filter[collection][_eq]=${id}`,
   );
 
@@ -26,5 +26,5 @@ export default async function BasicTopicPage({
     `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
   );
 
-  return <LearningTopic topic={topic} collection={collection} />;
+  return <LearningTopic topics={topics} collection={collection} />;
 }

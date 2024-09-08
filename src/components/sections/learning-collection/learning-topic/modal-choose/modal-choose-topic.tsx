@@ -7,7 +7,7 @@ import { ITopic } from "@/types/topic";
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
-  topic: ITopic[];
+  topics: ITopic[];
   active: number;
   onClick: (id: number) => void;
 };
@@ -15,7 +15,7 @@ type IProps = {
 export default function ModalChooseTopic({
   isOpen,
   setOpen,
-  topic,
+  topics,
   active,
   onClick,
 }: IProps) {
@@ -28,32 +28,32 @@ export default function ModalChooseTopic({
             Chọn chủ đề để bắt đầu luyện tập ngay
           </div>
           <div className="flex max-w-full flex-wrap gap-4">
-            {topic.map((item: any) => (
+            {topics.map((topic) => (
               <ButtonSpotlight
-                key={item.id}
+                key={topic.id}
                 pill="roundedFull"
                 spaceSide="space"
-                className={`flex items-center border ${active === item.id ? "gradient-secondary text-white" : "bg-white"}`}
+                className={`topics-center flex border ${active === topic.id ? "gradient-secondary text-white" : "bg-white"}`}
                 onClick={() => {
-                  onClick(item.id);
+                  onClick(topic.id);
                   setOpen();
                 }}
               >
-                <div className="text-base">{item.title}</div>
-                {(item.check || item.loading) && (
+                <div className="text-base">{topic.title}</div>
+                {/* {(topic.check || topic.loading) && (
                   <div className="icon-check-loading ml-2">
-                    {item.check && (
+                    {topic.check && (
                       <CircleCheck
                         className="size-5"
                         fill="#188E7E"
                         color="white"
                       />
                     )}
-                    {item.loading && (
+                    {topic.loading && (
                       <Loader2 className="size-4 text-[#25A28D]" />
                     )}
                   </div>
-                )}
+                )} */}
               </ButtonSpotlight>
             ))}
           </div>
