@@ -13,8 +13,6 @@ type IProps = {
 export default function SectionLearningCollection({ collection }: IProps) {
   const router = useRouter();
 
-  console.log(collection);
-
   return (
     <div className="content container mx-auto">
       <div className="relative grid gap-10 px-40 pb-40">
