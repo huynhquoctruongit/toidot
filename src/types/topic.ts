@@ -13,3 +13,9 @@ export type ITopic = {
   user_created: string;
   user_updated: string;
 };
+
+export type ITopicFilterValue = string;
+
+export type ITopicFilters = {
+  publish: string;
+};

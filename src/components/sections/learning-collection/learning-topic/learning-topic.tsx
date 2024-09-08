@@ -2,24 +2,21 @@
 
 import React, { useState } from "react";
 import { useBoolean } from "@/app/hook/use-boolean";
-import { optionsFetch } from "@/lib/api/axios-client";
-import useSWR from "swr";
+
 import { ITopic } from "@/types/topic";
 import { ICollection } from "@/types/collection";
 import HeadLearningTopic from "./head-learning-topic/head-learning-topic";
 import MainLearningTopic from "./main-learning-topic/main-learning-topic";
+import { IWord } from "@/types/word";
 
 type IProps = {
   topics: ITopic[];
   collections: ICollection[];
-  idCollection: number;
+
+  words: IWord[];
 };
 
-export default function LearningTopic({
-  topics,
-  collections,
-  idCollection,
-}: IProps) {
+export default function LearningTopic({ topics, collections, words }: IProps) {
   const comfirmTopic = useBoolean();
 
   const detail = useBoolean();
@@ -34,7 +31,7 @@ export default function LearningTopic({
         <HeadLearningTopic collections={collections} />
 
         {/*  */}
-        <MainLearningTopic topics={topics} idCollection={idCollection} />
+        <MainLearningTopic topics={topics} words={words} />
       </div>
 
       {/* modal chooseTopic */}

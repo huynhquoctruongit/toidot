@@ -3,16 +3,20 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import ButtonSpotlight from "@/components/common/button-spotlight";
-
-import { ITopic } from "@/types/topic";
+import { optionsFetch } from "@/lib/api/axios-client";
+import { ITopic, ITopicFilters } from "@/types/topic";
 import VocabularyChoose from "../vocabulary/vocabulary-choose";
+import GrammarChoose from "../grammar/grammar-choose";
+import useSWR from "swr";
+import { IWord } from "@/types/word";
 
 type IProps = {
   topics: ITopic[];
-  idCollection: number;
+  words: IWord[];
 };
 
-export default function MainLearningTopic({ topics, idCollection }: IProps) {
+//------------------------------------------------------------------------
+export default function MainLearningTopic({ topics, words }: IProps) {
   const [vocab, setVocab] = useState<boolean>(true);
 
   return (
@@ -61,24 +65,27 @@ export default function MainLearningTopic({ topics, idCollection }: IProps) {
         </div>
       </div>
 
-      <VocabularyChoose
-      //   doingAction={() => {
-      //     doing.onTrue();
-      //   }}
-      //   detailAction={() => {
-      //     detail.onTrue();
-      //   }}
-      //   topics={topics}
-      //   active={active}
-      //   onClick={handleActiveId}
-      //   wordTopic={data}
-      //   isOpen={detail.value}
-      //   setOpen={() => {
-      //     detail.onFalse();
-      //   }}
-      />
+      {vocab ? (
+        <VocabularyChoose
+          //   doingAction={() => {
+          //     doing.onTrue();
+          //   }}
+          //   detailAction={() => {
+          //     detail.onTrue();
+          //   }}
+          topics={topics}
+          //   active={active}
+          //   onClick={handleActiveId}
 
-      {/* <GrammarChoose /> */}
+          //   isOpen={detail.value}
+          //   setOpen={() => {
+          //     detail.onFalse();
+          //   }}
+          words={words}
+        />
+      ) : (
+        <GrammarChoose />
+      )}
     </div>
   );
 }

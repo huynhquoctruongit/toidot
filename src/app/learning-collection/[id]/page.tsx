@@ -2,6 +2,7 @@ import LearningTopic from "@/components/sections/learning-collection/learning-to
 import AxiosClient from "@/lib/api/axios-client";
 import { ICollection } from "@/types/collection";
 import { ITopic } from "@/types/topic";
+import { IWord } from "@/types/word";
 
 import { Metadata } from "next";
 
@@ -26,11 +27,11 @@ export default async function BasicTopicPage({
     `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
   );
 
+  const words: IWord[] = await AxiosClient.get(
+    `/items/word?fields=*.*&limit=-1&filter[topic][collection][_eq]=${id}`,
+  );
+
   return (
-    <LearningTopic
-      topics={topics}
-      collections={collections}
-      idCollection={id}
-    />
+    <LearningTopic topics={topics} collections={collections} words={words} />
   );
 }
