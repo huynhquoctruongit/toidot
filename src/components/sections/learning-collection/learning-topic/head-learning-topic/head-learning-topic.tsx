@@ -6,12 +6,21 @@ import Image from "next/image";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 import { ICollection } from "@/types/collection";
+import { IWord } from "@/types/word";
+import ModalChooseTopic from "../modal-choose/modal-choose-topic";
+import { useBoolean } from "@/app/hook/use-boolean";
+import { ITopicFilters } from "@/types/topic";
 
 type IProps = {
   collections: ICollection[];
+
+  handleActiveTopic: VoidFunction;
 };
 
-export default function HeadLearningTopic({ collections }: IProps) {
+export default function HeadLearningTopic({
+  collections,
+  handleActiveTopic,
+}: IProps) {
   return (
     <div className="content-top bg-gradient-basic w-full">
       {collections.map((collection) => (
@@ -46,9 +55,9 @@ export default function HeadLearningTopic({ collections }: IProps) {
                   color="gradientPrimary"
                   pill="roundedFull"
                   spaceSide="space"
-                  //   onClick={() => {
-                  //     comfirmTopic.onTrue();
-                  //   }}
+                  onClick={() => {
+                    handleActiveTopic();
+                  }}
                   className="text-white"
                 >
                   Luyện tập ngay

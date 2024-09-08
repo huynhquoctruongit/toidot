@@ -12,58 +12,30 @@ import { ITopic, ITopicFilters, ITopicFilterValue } from "@/types/topic";
 type IProps = {
   doingAction?: VoidFunction;
   detailAction?: VoidFunction;
-  topics: ITopic[];
+  topicTitle: string[];
   active?: number;
   onClick?: (id: number) => void;
 
   isOpen?: boolean;
   setOpen?: VoidFunction;
-  words: IWord[];
+  dataFiltered: IWord[];
+  filters: ITopicFilters;
+  handleFilterPublish: (action: string, topic: string) => void;
 };
 
-const defaultFilters: ITopicFilters = {
-  publish: "Tất cả",
-};
 //------------------------------------------
 export default function VocabularyChoose({
   doingAction,
   detailAction,
-  topics,
+  topicTitle,
   active,
   onClick,
   isOpen,
   setOpen,
-  words,
+  dataFiltered,
+  filters,
+  handleFilterPublish,
 }: IProps) {
-  const [filters, setFilters] = useState(defaultFilters);
-
-  const topicTitle = topics.map((topic) => topic.title);
-
-  topicTitle.unshift(defaultFilters.publish);
-
-  const handleFilters = useCallback(
-    (name: string, value: ITopicFilterValue) => {
-      setFilters((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    },
-    [],
-  );
-
-  const handleFilterPublish = useCallback(
-    (event: React.SyntheticEvent, newValue: string) => {
-      handleFilters("publish", newValue);
-    },
-
-    [handleFilters],
-  );
-
-  const dataFiltered = applyFilter({
-    inputData: words,
-    filters,
-  });
-
   return (
     <>
       <div className="selection-choose flex max-w-full flex-wrap gap-4">
@@ -73,7 +45,7 @@ export default function VocabularyChoose({
             topic={topic}
             filters={filters}
             handleFilterPublish={(action: string, topic: string) =>
-              handleFilterPublish({} as React.SyntheticEvent, topic)
+              handleFilterPublish(action, topic)
             }
           />
         ))}
@@ -91,20 +63,3 @@ export default function VocabularyChoose({
     </>
   );
 }
-
-//-----------------------
-const applyFilter = ({
-  inputData,
-  filters,
-}: {
-  inputData: IWord[];
-  filters: ITopicFilters;
-}) => {
-  const { publish } = filters;
-
-  if (publish !== "Tất cả") {
-    inputData = inputData?.filter((word) => word.topic.title === publish);
-  }
-
-  return inputData;
-};

@@ -40,7 +40,6 @@ interface IButtonSpotlight {
   spaceSide?: ISpaceSides;
   onClick?: (...arg: any) => void;
   type?: "button" | "submit" | "reset";
-  onChange?: VoidFunction;
 }
 
 export default function ButtonSpotlight({
@@ -51,14 +50,12 @@ export default function ButtonSpotlight({
   spaceSide = "default",
   icon,
   onClick,
-  onChange,
 }: IButtonSpotlight) {
   const base = "relative flex items-center text-center duration-200 z-[10] ";
   return (
     <button
       className={`${base} ${colors[color]} ${pills[pill]} ${spaceSides[spaceSide]} ${className}`}
       onClick={onClick}
-      onChange={onChange}
     >
       {icon}
       {children}

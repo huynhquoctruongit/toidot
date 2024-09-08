@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
 import { useBoolean } from "@/app/hook/use-boolean";
 
-import { ITopic } from "@/types/topic";
 import { ICollection } from "@/types/collection";
 import HeadLearningTopic from "./head-learning-topic/head-learning-topic";
 import MainLearningTopic from "./main-learning-topic/main-learning-topic";
+
+import React, { useCallback, useState } from "react";
+
 import { IWord } from "@/types/word";
+
+import { ITopic, ITopicFilters, ITopicFilterValue } from "@/types/topic";
+import ModalChooseTopic from "./modal-choose/modal-choose-topic";
 
 type IProps = {
   topics: ITopic[];
@@ -16,34 +20,84 @@ type IProps = {
   words: IWord[];
 };
 
+const defaultFilters: ITopicFilters = {
+  publish: "Tất cả",
+};
+
+//---------------------------------------------------------
+
 export default function LearningTopic({ topics, collections, words }: IProps) {
-  const comfirmTopic = useBoolean();
+  const activeTopic = useBoolean();
 
-  const detail = useBoolean();
+  // const detail = useBoolean();
 
-  const doing = useBoolean();
+  // const doing = useBoolean();
 
-  const doingAnswerSuccess = useBoolean();
+  // const doingAnswerSuccess = useBoolean();
+
+  const [filters, setFilters] = useState(defaultFilters);
+
+  const topicTitle = topics.map((topic) => topic.title);
+
+  topicTitle.unshift(defaultFilters.publish);
+
+  const handleFilters = useCallback(
+    (name: string, value: ITopicFilterValue) => {
+      setFilters((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    },
+    [],
+  );
+
+  const handleFilterPublish = useCallback(
+    (event: React.SyntheticEvent, newValue: string) => {
+      handleFilters("publish", newValue);
+    },
+
+    [handleFilters],
+  );
+
+  const dataFiltered = applyFilter({
+    inputData: words,
+    filters,
+  });
+
+  const handleActiveTopic = () => {
+    activeTopic.onTrue();
+  };
 
   return (
     <>
       <div className="content relative w-full">
-        <HeadLearningTopic collections={collections} />
+        <HeadLearningTopic
+          collections={collections}
+          handleActiveTopic={handleActiveTopic}
+        />
 
-        {/*  */}
-        <MainLearningTopic topics={topics} words={words} />
+        <MainLearningTopic
+          topicTitle={topicTitle}
+          dataFiltered={dataFiltered}
+          filters={filters}
+          handleFilterPublish={(action: string, topic: string) => {
+            handleFilterPublish({} as React.SyntheticEvent, topic);
+          }}
+        />
       </div>
 
       {/* modal chooseTopic */}
-      {/* <ModalChooseTopic
-        isOpen={comfirmTopic.value}
+      <ModalChooseTopic
+        isOpen={activeTopic.value}
         setOpen={() => {
-          comfirmTopic.onFalse();
+          activeTopic.onFalse();
         }}
-        topics={topics}
-        active={active}
-        onClick={handleActiveId}
-      /> */}
+        topicTitle={topicTitle}
+        filters={filters}
+        handleFilterPublish={(action: string, topic: string) => {
+          handleFilterPublish({} as React.SyntheticEvent, topic);
+        }}
+      />
 
       {/* <ModalChooseDoing
         isOpen={doing.value}
@@ -68,3 +122,20 @@ export default function LearningTopic({ topics, collections, words }: IProps) {
     </>
   );
 }
+
+//-----------------------
+const applyFilter = ({
+  inputData,
+  filters,
+}: {
+  inputData: IWord[];
+  filters: ITopicFilters;
+}) => {
+  const { publish } = filters;
+
+  if (publish !== "Tất cả") {
+    inputData = inputData?.filter((word) => word.topic.title === publish);
+  }
+
+  return inputData;
+};

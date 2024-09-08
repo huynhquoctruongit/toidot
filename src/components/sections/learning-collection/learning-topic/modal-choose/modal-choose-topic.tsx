@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import Modal from "@/components/modal";
 import { CircleCheck, Loader2 } from "lucide-react";
 import ButtonSpotlight from "@/components/common/button-spotlight";
-import { ITopic } from "@/types/topic";
+import { ITopic, ITopicFilters } from "@/types/topic";
+import TabsTopic from "../vocabulary/tabs-topic";
 
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
-  topics: ITopic[];
-  active: number;
-  onClick: (id: number) => void;
+  topicTitle?: string[];
+  filters: ITopicFilters;
+  handleFilterPublish: (action: string, topic: string) => void;
 };
 
 export default function ModalChooseTopic({
   isOpen,
   setOpen,
-  topics,
-  active,
-  onClick,
+  topicTitle,
+  filters,
+  handleFilterPublish,
 }: IProps) {
   return (
     <Modal isOpen={isOpen} setOpen={setOpen} className="choose-topic">
@@ -28,33 +29,16 @@ export default function ModalChooseTopic({
             Chọn chủ đề để bắt đầu luyện tập ngay
           </div>
           <div className="flex max-w-full flex-wrap gap-4">
-            {topics.map((topic) => (
-              <ButtonSpotlight
-                key={topic.id}
-                pill="roundedFull"
-                spaceSide="space"
-                className={`topics-center flex border ${active === topic.id ? "gradient-secondary text-white" : "bg-white"}`}
-                onClick={() => {
-                  onClick(topic.id);
-                  setOpen();
-                }}
-              >
-                <div className="text-base">{topic.title}</div>
-                {/* {(topic.check || topic.loading) && (
-                  <div className="icon-check-loading ml-2">
-                    {topic.check && (
-                      <CircleCheck
-                        className="size-5"
-                        fill="#188E7E"
-                        color="white"
-                      />
-                    )}
-                    {topic.loading && (
-                      <Loader2 className="size-4 text-[#25A28D]" />
-                    )}
-                  </div>
-                )} */}
-              </ButtonSpotlight>
+            {topicTitle?.map((topic) => (
+              <TabsTopic
+                key={topic}
+                topic={topic}
+                filters={filters}
+                handleFilterPublish={(action: string, topic: string) =>
+                  handleFilterPublish(action, topic)
+                }
+                setOpen={setOpen}
+              />
             ))}
           </div>
         </div>

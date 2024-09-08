@@ -1,16 +1,19 @@
 import ButtonSpotlight from "@/components/common/button-spotlight";
+import { ITopicFilters } from "@/types/topic";
 import { CircleCheck, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 type IProps = {
   topic: string;
   handleFilterPublish: (action: string, topic: string) => void;
-  filters: any;
+  filters: ITopicFilters;
+  setOpen?: VoidFunction;
 };
 export default function TabsTopic({
   topic,
   handleFilterPublish,
   filters,
+  setOpen,
 }: IProps) {
   return (
     <>
@@ -19,6 +22,7 @@ export default function TabsTopic({
         spaceSide="space"
         className={`flex items-center border ${topic === filters.publish ? "gradient-secondary text-white" : "bg-white"}`}
         onClick={() => {
+          if (setOpen) setOpen();
           handleFilterPublish("publish", topic);
         }}
       >
