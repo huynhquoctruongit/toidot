@@ -11,19 +11,12 @@ import useSWR from "swr";
 import { IWord } from "@/types/word";
 
 type IProps = {
-  topicTitle: string[];
-  dataFiltered: IWord[];
-  filters: ITopicFilters;
-  handleFilterPublish: (action: string, topic: string) => void;
+  topics: ITopic[];
+  idCollection: number;
 };
 
 //------------------------------------------------------------------------
-export default function MainLearningTopic({
-  topicTitle,
-  dataFiltered,
-  filters,
-  handleFilterPublish,
-}: IProps) {
+export default function MainLearningTopic({ topics, idCollection }: IProps) {
   const [vocab, setVocab] = useState<boolean>(true);
 
   return (
@@ -73,12 +66,7 @@ export default function MainLearningTopic({
       </div>
 
       {vocab ? (
-        <VocabularyChoose
-          filters={filters}
-          handleFilterPublish={handleFilterPublish}
-          dataFiltered={dataFiltered}
-          topicTitle={topicTitle}
-        />
+        <VocabularyChoose topics={topics} idCollection={idCollection} />
       ) : (
         <GrammarChoose />
       )}

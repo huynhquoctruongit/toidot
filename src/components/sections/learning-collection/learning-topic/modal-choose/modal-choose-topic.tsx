@@ -4,22 +4,18 @@ import { CircleCheck, Loader2 } from "lucide-react";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import { ITopic, ITopicFilters } from "@/types/topic";
 import TabsTopic from "../vocabulary/tabs-topic";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
-  topicTitle?: string[];
-  filters: ITopicFilters;
-  handleFilterPublish: (action: string, topic: string) => void;
+  topics: ITopic[];
 };
 
-export default function ModalChooseTopic({
-  isOpen,
-  setOpen,
-  topicTitle,
-  filters,
-  handleFilterPublish,
-}: IProps) {
+export default function ModalChooseTopic({ isOpen, setOpen, topics }: IProps) {
+  const pathname = usePathname();
+  const params = useSearchParams();
   return (
     <Modal isOpen={isOpen} setOpen={setOpen} className="choose-topic">
       <div className="max-w-4xl rounded-[10px] bg-white px-6 py-5">
@@ -29,16 +25,20 @@ export default function ModalChooseTopic({
             Chọn chủ đề để bắt đầu luyện tập ngay
           </div>
           <div className="flex max-w-full flex-wrap gap-4">
-            {topicTitle?.map((topic) => (
-              <TabsTopic
-                key={topic}
-                topic={topic}
-                filters={filters}
-                handleFilterPublish={(action: string, topic: string) =>
-                  handleFilterPublish(action, topic)
-                }
-                setOpen={setOpen}
-              />
+            <Link href={pathname} className="rounded-full border">
+              <ButtonSpotlight
+                pill="roundedFull"
+                spaceSide="space"
+                className={`flex items-center ${pathname === pathname + params.toString() ? "gradient-secondary text-white" : "bg-white"}`}
+                onClick={() => {
+                  setOpen();
+                }}
+              >
+                <div className="text-base">Tất cả</div>
+              </ButtonSpotlight>
+            </Link>
+            {topics.map((topic) => (
+              <TabsTopic key={topic.id} topic={topic.title} setOpen={setOpen} />
             ))}
           </div>
         </div>

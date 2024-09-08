@@ -51,7 +51,8 @@ export default function ButtonSpotlight({
   icon,
   onClick,
 }: IButtonSpotlight) {
-  const base = "relative flex items-center text-center duration-200 z-[10] ";
+  const base =
+    "relative flex items-center text-center duration-200 z-[10] ease-linear";
   return (
     <button
       className={`${base} ${colors[color]} ${pills[pill]} ${spaceSides[spaceSide]} ${className}`}

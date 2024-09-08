@@ -1,49 +1,57 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
-import useSWR from "swr";
+import React, { useState } from "react";
+
 import { IWord } from "@/types/word";
 import HeadVocabulary from "./head-vocabulary";
 import TabsTopic from "./tabs-topic";
 import WordVocabulary from "./word-vocabulary";
-import { optionsFetch } from "@/lib/api/axios-client";
-import { ITopic, ITopicFilters, ITopicFilterValue } from "@/types/topic";
+
+import { ITopic } from "@/types/topic";
+import ButtonSpotlight from "@/components/common/button-spotlight";
+import Link from "next/link";
+
+import { usePathname, useSearchParams } from "next/navigation";
 
 type IProps = {
   doingAction?: VoidFunction;
-  topicTitle: string[];
-  dataFiltered: IWord[];
-  filters: ITopicFilters;
-  handleFilterPublish: (action: string, topic: string) => void;
+  topics: ITopic[];
+  idCollection: number;
 };
 
 //------------------------------------------
 export default function VocabularyChoose({
   doingAction,
-  topicTitle,
-  dataFiltered,
-  filters,
-  handleFilterPublish,
+
+  topics,
+  idCollection,
 }: IProps) {
+  const pathname = usePathname();
+
+  const params = useSearchParams();
+
   return (
     <>
       <div className="selection-choose flex max-w-full flex-wrap gap-4">
-        {topicTitle.map((topic) => (
-          <TabsTopic
-            key={topic}
-            topic={topic}
-            filters={filters}
-            handleFilterPublish={(action: string, topic: string) =>
-              handleFilterPublish(action, topic)
-            }
-          />
+        <Link href={pathname} className="rounded-full border">
+          <ButtonSpotlight
+            pill="roundedFull"
+            spaceSide="space"
+            className={`flex items-center ${pathname === pathname + params.toString() ? "gradient-secondary text-white" : "bg-white"}`}
+          >
+            <div className="text-base">Tất cả</div>
+          </ButtonSpotlight>
+        </Link>
+
+        {topics.map((topic) => (
+          <TabsTopic key={topic.id} topic={topic.title} />
         ))}
       </div>
 
       <div className="table-learning grid w-full gap-4 rounded-[8px] border bg-white p-6">
         <HeadVocabulary doingAction={doingAction} />
 
-        <WordVocabulary wordFlowTopic={dataFiltered} />
+        <WordVocabulary idCollection={idCollection} />
       </div>
 
       <button className="see-more w-full rounded-[8px] border bg-white p-2 text-[#2E2E2E] text-opacity-80">

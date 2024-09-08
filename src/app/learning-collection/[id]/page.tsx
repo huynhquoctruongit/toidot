@@ -27,15 +27,10 @@ export default async function BasicTopicPage({
     `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
   );
 
-  const words = await AxiosClient.get(
-    `/items/word?fields=*.*&limit=-1&filter[topic][collection][_eq]=${id}`,
-  );
-
   return (
     <LearningTopic
       topics={topics.data}
       collections={collections.data}
-      words={words.data}
       idCollection={id}
     />
   );
