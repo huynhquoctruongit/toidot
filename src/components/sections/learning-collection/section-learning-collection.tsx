@@ -42,13 +42,7 @@ export default function SectionLearningCollection({ collection }: IProps) {
               <div className="flex items-center">
                 <ButtonCommon
                   pill="rounded"
-                  className={
-                    item.id === 1
-                      ? "btn-secondary1"
-                      : item.id === 2
-                        ? "btn-primary1"
-                        : ""
-                  }
+                  color={item.id % 2 === 0 ? "primary1" : "secondary1"}
                   spaceSide="space"
                 >
                   <div className="text-3xl font-bold text-white">{item.id}</div>

@@ -1,7 +1,8 @@
 import LearningTopic from "@/components/sections/learning-collection/learning-topic/learning-topic";
 import AxiosClient from "@/lib/api/axios-client";
+import { ICollection } from "@/types/collection";
 import { ITopic } from "@/types/topic";
-import axios from "axios";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,5 +22,9 @@ export default async function BasicTopicPage({
     `/items/topic?fields=*.*&filter[collection][_eq]=${id}`,
   );
 
-  return <LearningTopic topic={topic} />;
+  const collection: ICollection[] = await AxiosClient.get(
+    `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
+  );
+
+  return <LearningTopic topic={topic} collection={collection} />;
 }
