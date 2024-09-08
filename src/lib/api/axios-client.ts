@@ -10,7 +10,7 @@ export const AxiosClient = axios.create({
 });
 
 AxiosClient.interceptors.response.use(function (response: any) {
-  return response.data.data;
+  return response.data;
 }, interceptorError);
 
 AxiosClient.interceptors.request.use(function (config: any) {

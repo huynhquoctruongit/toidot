@@ -16,8 +16,8 @@ import ModalChooseTopic from "./modal-choose/modal-choose-topic";
 type IProps = {
   topics: ITopic[];
   collections: ICollection[];
-
   words: IWord[];
+  idCollection: number;
 };
 
 const defaultFilters: ITopicFilters = {
@@ -26,12 +26,13 @@ const defaultFilters: ITopicFilters = {
 
 //---------------------------------------------------------
 
-export default function LearningTopic({ topics, collections, words }: IProps) {
+export default function LearningTopic({
+  topics,
+  collections,
+  words,
+  idCollection,
+}: IProps) {
   const activeTopic = useBoolean();
-
-  // const doing = useBoolean();
-
-  // const doingAnswerSuccess = useBoolean();
 
   const [filters, setFilters] = useState(defaultFilters);
 

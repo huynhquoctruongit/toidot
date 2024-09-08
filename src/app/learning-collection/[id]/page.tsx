@@ -19,19 +19,24 @@ export default async function BasicTopicPage({
 }) {
   const { id } = params;
 
-  const topics: ITopic[] = await AxiosClient.get(
+  const topics = await AxiosClient.get(
     `/items/topic?fields=*.*&filter[collection][_eq]=${id}`,
   );
 
-  const collections: ICollection[] = await AxiosClient.get(
+  const collections = await AxiosClient.get(
     `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
   );
 
-  const words: IWord[] = await AxiosClient.get(
+  const words = await AxiosClient.get(
     `/items/word?fields=*.*&limit=-1&filter[topic][collection][_eq]=${id}`,
   );
 
   return (
-    <LearningTopic topics={topics} collections={collections} words={words} />
+    <LearningTopic
+      topics={topics.data}
+      collections={collections.data}
+      words={words.data}
+      idCollection={id}
+    />
   );
 }

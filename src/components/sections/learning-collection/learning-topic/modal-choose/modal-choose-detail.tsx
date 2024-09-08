@@ -56,7 +56,10 @@ export default function ModalChooseDetail({
             </div>
             <div className="exp-translate">
               {itemWord.example_sentences.map((item: any) => (
-                <div className="exp font-bold text-[#2E2E2E] text-opacity-80">
+                <div
+                  key={item.en}
+                  className="exp font-bold text-[#2E2E2E] text-opacity-80"
+                >
                   {item.en}
                   <div className="exp-translate text-[14px] font-light italic">
                     {item.vi}
