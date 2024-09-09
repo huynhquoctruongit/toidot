@@ -1,22 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import ButtonSpotlight from "@/components/common/button-spotlight";
-import { optionsFetch } from "@/lib/api/axios-client";
-import { ITopic, ITopicFilters } from "@/types/topic";
+import { ITopic } from "@/types/topic";
 import VocabularyChoose from "../vocabulary/vocabulary-choose";
 import GrammarChoose from "../grammar/grammar-choose";
-import useSWR from "swr";
-import { IWord } from "@/types/word";
 
 type IProps = {
   topics: ITopic[];
   idCollection: number;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 };
 
 //------------------------------------------------------------------------
-export default function MainLearningTopic({ topics, idCollection }: IProps) {
+export default function MainLearningTopic({
+  topics,
+  idCollection,
+  page,
+  setPage,
+}: IProps) {
   const [vocab, setVocab] = useState<boolean>(true);
 
   return (
@@ -66,7 +70,12 @@ export default function MainLearningTopic({ topics, idCollection }: IProps) {
       </div>
 
       {vocab ? (
-        <VocabularyChoose topics={topics} idCollection={idCollection} />
+        <VocabularyChoose
+          topics={topics}
+          idCollection={idCollection}
+          page={page}
+          setPage={setPage}
+        />
       ) : (
         <GrammarChoose />
       )}

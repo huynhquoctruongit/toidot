@@ -8,8 +8,9 @@ import { useEffect, useState } from "react";
 type IProps = {
   topic: string;
   setOpen?: VoidFunction;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 };
-export default function TabsTopic({ topic, setOpen }: IProps) {
+export default function TabsTopic({ topic, setOpen, setPage }: IProps) {
   const pathname = usePathname();
   const params = useSearchParams();
   const objParams: any = {};
@@ -28,6 +29,7 @@ export default function TabsTopic({ topic, setOpen }: IProps) {
         spaceSide="space"
         className={`flex items-center border ${params.get("title") === topic ? "gradient-secondary text-white" : "bg-white"}`}
         onClick={() => {
+          setPage(0);
           if (setOpen) setOpen();
         }}
       >

@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 import { ICollection } from "@/types/collection";
-import { IWord } from "@/types/word";
-import ModalChooseTopic from "../modal-choose/modal-choose-topic";
-import { useBoolean } from "@/app/hook/use-boolean";
-import { ITopicFilters } from "@/types/topic";
 
 type IProps = {
   collections: ICollection[];

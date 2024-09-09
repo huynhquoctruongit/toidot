@@ -1,36 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
-
-import { IWord } from "@/types/word";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import HeadVocabulary from "./head-vocabulary";
 import TabsTopic from "./tabs-topic";
 import WordVocabulary from "./word-vocabulary";
-
 import { ITopic } from "@/types/topic";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import Link from "next/link";
-
 import { usePathname, useSearchParams } from "next/navigation";
 
 type IProps = {
   doingAction?: VoidFunction;
   topics: ITopic[];
   idCollection: number;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 };
 
 //------------------------------------------
 export default function VocabularyChoose({
   doingAction,
-
   topics,
   idCollection,
+  page,
+  setPage,
 }: IProps) {
   const pathname = usePathname();
 
   const params = useSearchParams();
-
-  const [page, setPage] = useState(0);
 
   return (
     <>
@@ -46,14 +43,18 @@ export default function VocabularyChoose({
         </Link>
 
         {topics.map((topic) => (
-          <TabsTopic key={topic.id} topic={topic.title} />
+          <TabsTopic key={topic.id} topic={topic.title} setPage={setPage} />
         ))}
       </div>
 
       <div className="table-learning grid w-full gap-4 rounded-[8px] border bg-white p-6">
         <HeadVocabulary doingAction={doingAction} />
 
-        <WordVocabulary idCollection={idCollection} />
+        <WordVocabulary
+          idCollection={idCollection}
+          page={page}
+          setPage={setPage}
+        />
       </div>
     </>
   );

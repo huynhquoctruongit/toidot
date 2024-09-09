@@ -9,11 +9,17 @@ import useSWR from "swr";
 import { optionsFetch } from "@/lib/api/axios-client";
 import { ChevronRightIcon } from "lucide-react";
 
+type IProps = {
+  idCollection: number;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+};
+
 export default function WordVocabulary({
   idCollection,
-}: {
-  idCollection: number;
-}) {
+  page,
+  setPage,
+}: IProps) {
   const activeItemWord = useBoolean();
 
   const [idItemWord, setIdItemWord] = useState<number | null>();
@@ -29,8 +35,6 @@ export default function WordVocabulary({
   };
 
   const filters = { _and: [{ topic: { collection: { id: { _eq: "1" } } } }] };
-
-  const [page, setPage] = useState(0);
 
   const data: any = useRef(null);
 

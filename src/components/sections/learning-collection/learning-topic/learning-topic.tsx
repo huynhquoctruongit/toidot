@@ -1,17 +1,12 @@
 "use client";
 
 import { useBoolean } from "@/app/hook/use-boolean";
-
 import { ICollection } from "@/types/collection";
 import HeadLearningTopic from "./head-learning-topic/head-learning-topic";
 import MainLearningTopic from "./main-learning-topic/main-learning-topic";
-
-import React, { useCallback, useState } from "react";
-
-import { IWord } from "@/types/word";
-
 import { ITopic } from "@/types/topic";
 import ModalChooseTopic from "./modal-choose/modal-choose-topic";
+import { useState } from "react";
 
 type IProps = {
   topics: ITopic[];
@@ -32,6 +27,8 @@ export default function LearningTopic({
     activeTopic.onTrue();
   };
 
+  const [page, setPage] = useState(0);
+
   return (
     <>
       <div className="content relative w-full">
@@ -40,16 +37,21 @@ export default function LearningTopic({
           handleActiveTopic={handleActiveTopic}
         />
 
-        <MainLearningTopic topics={topics} idCollection={idCollection} />
+        <MainLearningTopic
+          topics={topics}
+          idCollection={idCollection}
+          page={page}
+          setPage={setPage}
+        />
       </div>
 
-      {/* modal chooseTopic */}
       <ModalChooseTopic
         isOpen={activeTopic.value}
         setOpen={() => {
           activeTopic.onFalse();
         }}
         topics={topics}
+        setPage={setPage}
       />
 
       {/* <ModalChooseDoing

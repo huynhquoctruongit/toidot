@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Modal from "@/components/modal";
-import { CircleCheck, Loader2 } from "lucide-react";
 import ButtonSpotlight from "@/components/common/button-spotlight";
-import { ITopic, ITopicFilters } from "@/types/topic";
+import { ITopic } from "@/types/topic";
 import TabsTopic from "../vocabulary/tabs-topic";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -10,10 +9,16 @@ import { usePathname, useSearchParams } from "next/navigation";
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
+  setPage: Dispatch<SetStateAction<number>>;
   topics: ITopic[];
 };
 
-export default function ModalChooseTopic({ isOpen, setOpen, topics }: IProps) {
+export default function ModalChooseTopic({
+  isOpen,
+  setOpen,
+  topics,
+  setPage,
+}: IProps) {
   const pathname = usePathname();
   const params = useSearchParams();
   return (
@@ -38,7 +43,12 @@ export default function ModalChooseTopic({ isOpen, setOpen, topics }: IProps) {
               </ButtonSpotlight>
             </Link>
             {topics.map((topic) => (
-              <TabsTopic key={topic.id} topic={topic.title} setOpen={setOpen} />
+              <TabsTopic
+                key={topic.id}
+                topic={topic.title}
+                setOpen={setOpen}
+                setPage={setPage}
+              />
             ))}
           </div>
         </div>
