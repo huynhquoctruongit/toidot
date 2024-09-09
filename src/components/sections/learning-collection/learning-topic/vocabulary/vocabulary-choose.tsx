@@ -1,7 +1,5 @@
 "use client";
-
 import React, { Dispatch, SetStateAction, useState } from "react";
-import HeadVocabulary from "./head-vocabulary";
 import TabsTopic from "./tabs-topic";
 import WordVocabulary from "./word-vocabulary";
 import { ITopic } from "@/types/topic";

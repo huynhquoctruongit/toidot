@@ -18,6 +18,14 @@ interface PropsLoader extends ParamsProps {
 export const MyImage = ({ src, ...props }: PropsLoader) => {
   const source = `${process.env.NEXT_PUBLIC_ASSETS_API}assets/${src}`;
   return (
-    <Image src={source} {...props} alt="Picture of the author" unoptimized />
+    <Image
+      src={source}
+      {...props}
+      alt="Picture of the author"
+      unoptimized
+      style={{
+        maxWidth: "100%",
+      }}
+    />
   );
 };
