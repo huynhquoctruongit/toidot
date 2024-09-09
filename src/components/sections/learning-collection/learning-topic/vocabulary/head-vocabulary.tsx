@@ -12,7 +12,7 @@ export default function HeadVocabulary({
     <div className="learning-top flex items-center justify-between">
       <div className="title-learning">
         <div className="flex items-center text-xl font-bold leading-[30px]">
-          Từ vựng : <span className="text-gradient-1">{words}</span>
+          <span className="text-gradient-1">{words}&ensp;</span>Từ vựng
         </div>
         <div className="mt-2 text-[14px]">Danh sách từ vựng bla bla</div>
       </div>

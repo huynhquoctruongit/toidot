@@ -4,11 +4,12 @@ import { IWord } from "@/types/word";
 import ModalChooseDetail from "../modal-choose/modal-choose-detail";
 import { useBoolean } from "@/app/hook/use-boolean";
 import { useSearchParams } from "next/navigation";
-import { URLparamsToObject } from "@/middleware/helper";
+import { renderImageById, URLparamsToObject } from "@/middleware/helper";
 import useSWR from "swr";
 import { optionsFetch } from "@/lib/api/axios-client";
 import { ChevronRightIcon } from "lucide-react";
 import HeadVocabulary from "./head-vocabulary";
+import { MyImage } from "@/components/common/image";
 
 type IProps = {
   idCollection: number;
@@ -71,7 +72,7 @@ export default function WordVocabulary({
       />
       <div className="learning-bottom grid grid-cols-4 gap-6">
         {words &&
-          words.data.map((word: IWord) => (
+          (words.data || []).map((word: IWord) => (
             <div key={word.id}>
               <div
                 className="cursor-pointer rounded-[8px] border"
@@ -82,16 +83,25 @@ export default function WordVocabulary({
               >
                 <div className="grid grid-cols-3">
                   <div className="thumnail-choose-table col-span-1 flex items-center justify-center border-r bg-[#FFAA00] bg-opacity-5">
-                    <div className="p-1">
-                      <Image
-                        src={"/images/fan.png"}
-                        alt={""}
-                        width={83}
-                        height={87}
-                        priority
-                        quality={100}
-                        className="flex object-cover"
-                      />
+                    <div className="size-full p-1">
+                      {word.image?.id ? (
+                        <MyImage
+                          src={word.image?.id}
+                          width={100}
+                          height={100}
+                          className="block h-[100px] w-full items-center rounded object-fill"
+                        />
+                      ) : (
+                        <Image
+                          src="/images/fan.png"
+                          alt="logo"
+                          width={83}
+                          height={87}
+                          priority
+                          quality={100}
+                          className="flex h-[100px] w-full items-center object-fill"
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -126,7 +136,9 @@ export default function WordVocabulary({
                     key={index + "arrayket"}
                     className={
                       "button-contact mx-2 flex size-10 cursor-pointer items-center justify-center rounded-full border text-center leading-[40px] transition-all duration-300 ease-in-out hover:bg-[#fef7f5] " +
-                      (index === page ? "gradient-secondary" : "bg-[#f2f2f2]")
+                      (index === page
+                        ? "gradient-secondary text-white"
+                        : "bg-[#f2f2f2]")
                     }
                     onClick={() => setPage(index)}
                   >

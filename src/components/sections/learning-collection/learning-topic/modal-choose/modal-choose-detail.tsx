@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "@/components/modal";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
+import { MyImage } from "@/components/common/image";
 
 type IProps = {
   isOpen: boolean;
@@ -18,7 +19,7 @@ export default function ModalChooseDetail({
     <Modal isOpen={isOpen} setOpen={setOpen} className="choose-detail">
       <div className="max-w-[600px] rounded-[10px] border-[10px] border-[#F5F5F5] bg-white p-3">
         <div className="content">
-          <div className="vocabulary-grammar-thumnail grid grid-flow-col items-center gap-3">
+          <div className="vocabulary-grammar-thumnail grid grid-flow-col items-center gap-5">
             <div className="vocabulary-grammar flex flex-col gap-3">
               <div className="vocabulary text-gradient-1 text-3xl font-bold">
                 {itemWord.title}
@@ -37,16 +38,25 @@ export default function ModalChooseDetail({
                 <span className="font-light">{itemWord.meanings}</span>
               </div>
             </div>
-            <div className="flex items-start justify-end">
-              <Image
-                src="/images/Group 194.png"
-                alt="logo"
-                width={227}
-                height={202}
-                priority
-                quality={100}
-                className="flex object-cover"
-              />
+            <div className="flex h-full w-[220px] items-start justify-end">
+              {itemWord.image?.id ? (
+                <MyImage
+                  src={itemWord.image?.id}
+                  width={227}
+                  height={202}
+                  className="block h-[200px] w-full items-center rounded object-fill"
+                />
+              ) : (
+                <Image
+                  src="/images/fan.png"
+                  alt="logo"
+                  width={227}
+                  height={202}
+                  priority
+                  quality={100}
+                  className="flex h-[200px] w-full items-center object-contain"
+                />
+              )}
             </div>
           </div>
 
