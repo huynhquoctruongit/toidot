@@ -8,17 +8,20 @@ import { URLparamsToObject } from "@/middleware/helper";
 import useSWR from "swr";
 import { optionsFetch } from "@/lib/api/axios-client";
 import { ChevronRightIcon } from "lucide-react";
+import HeadVocabulary from "./head-vocabulary";
 
 type IProps = {
   idCollection: number;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  doingAction?: VoidFunction;
 };
 
 export default function WordVocabulary({
   idCollection,
   page,
   setPage,
+  doingAction,
 }: IProps) {
   const activeItemWord = useBoolean();
 
@@ -58,8 +61,14 @@ export default function WordVocabulary({
   const pages: number = Math.ceil(filter_count / limit);
   const isLoading = !error && !words;
 
+  const length = words?.data.length;
+
   return (
     <>
+      <HeadVocabulary
+        doingAction={doingAction}
+        words={filter_count ? filter_count : length}
+      />
       <div className="learning-bottom grid grid-cols-4 gap-6">
         {words &&
           words.data.map((word: IWord) => (

@@ -48,12 +48,11 @@ export default function VocabularyChoose({
       </div>
 
       <div className="table-learning grid w-full gap-4 rounded-[8px] border bg-white p-6">
-        <HeadVocabulary doingAction={doingAction} />
-
         <WordVocabulary
           idCollection={idCollection}
           page={page}
           setPage={setPage}
+          doingAction={doingAction}
         />
       </div>
     </>
