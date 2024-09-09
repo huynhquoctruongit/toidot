@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { URLparamsToObject } from "@/middleware/helper";
 import useSWR from "swr";
 import { optionsFetch } from "@/lib/api/axios-client";
+import { ChevronRightIcon } from "lucide-react";
 
 export default function WordVocabulary({
   idCollection,
@@ -14,6 +15,8 @@ export default function WordVocabulary({
   idCollection: number;
 }) {
   const activeItemWord = useBoolean();
+
+  const [idItemWord, setIdItemWord] = useState<number | null>();
 
   const convertParamToQuery = (params: any) => {
     const payload = {
@@ -42,7 +45,7 @@ export default function WordVocabulary({
   const params = convertParamToQuery(payload);
 
   const { data: words, error } = useSWR(
-    `/items/word?fields=*.*&offset=${offset}&limit=${limit}&meta=filter_count&filter_count,&filter=` +
+    `/items/word?fields=*.*&offset=${payload.title ? offset : ""}&limit=${payload.title ? limit : -1}${payload.title ? "&meta=filter_count&filter_count" : ""}&filter=` +
       (payload.title ? JSON.stringify(params) : JSON.stringify(filters)),
     optionsFetch,
   );
@@ -52,51 +55,97 @@ export default function WordVocabulary({
   const isLoading = !error && !words;
 
   return (
-    <div className="learning-bottom grid grid-cols-4 gap-6">
-      {words &&
-        words.data.map((word: IWord) => (
-          <div key={word.id}>
-            <div
-              className="cursor-pointer rounded-[8px] border"
-              onClick={() => {
-                activeItemWord.onTrue();
-                // setIdItemWord(word ? word.id : Number);
-              }}
-            >
-              <div className="grid grid-cols-3">
-                <div className="thumnail-choose-table col-span-1 flex items-center justify-center border-r bg-[#FFAA00] bg-opacity-5">
-                  <div className="p-1">
-                    <Image
-                      src={"/images/fan.png"}
-                      alt={""}
-                      width={83}
-                      height={87}
-                      priority
-                      quality={100}
-                      className="flex object-cover"
-                    />
+    <>
+      <div className="learning-bottom grid grid-cols-4 gap-6">
+        {words &&
+          words.data.map((word: IWord) => (
+            <div key={word.id}>
+              <div
+                className="cursor-pointer rounded-[8px] border"
+                onClick={() => {
+                  activeItemWord.onTrue();
+                  setIdItemWord(word.id);
+                }}
+              >
+                <div className="grid grid-cols-3">
+                  <div className="thumnail-choose-table col-span-1 flex items-center justify-center border-r bg-[#FFAA00] bg-opacity-5">
+                    <div className="p-1">
+                      <Image
+                        src={"/images/fan.png"}
+                        alt={""}
+                        width={83}
+                        height={87}
+                        priority
+                        quality={100}
+                        className="flex object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="col-span-2 ml-2 flex flex-col justify-between p-1 text-[14px] text-[#2E2E2E]">
-                  <div>
-                    <div className="uppercase opacity-80">{word.title}</div>
-                    <div className="opacity-30">{word.pronunciation}</div>
+                  <div className="col-span-2 ml-2 flex flex-col justify-between p-1 text-[14px] text-[#2E2E2E]">
+                    <div>
+                      <div className="uppercase opacity-80">{word.title}</div>
+                      <div className="opacity-30">{word.pronunciation}</div>
+                    </div>
+                    <div className="capitalize opacity-80">{word.meanings}</div>
                   </div>
-                  <div className="capitalize opacity-80">{word.meanings}</div>
                 </div>
               </div>
-            </div>
 
-            {/* {idItemWord === word.id && (
-            <ModalChooseDetail
-              isOpen={activeItemWord.value}
-              setOpen={activeItemWord.onFalse}
-              itemWord={word}
-            />
-          )} */}
-          </div>
-        ))}
-    </div>
+              {idItemWord === word.id && (
+                <ModalChooseDetail
+                  isOpen={activeItemWord.value}
+                  setOpen={activeItemWord.onFalse}
+                  itemWord={word}
+                />
+              )}
+            </div>
+          ))}
+      </div>
+      {words && words.data.length > 0 && (
+        <nav className="woocommerce-pagination">
+          <ul className="page-numbers flex items-center">
+            {Array(pages)
+              .fill(null)
+              .map((element: any, index: number) => {
+                return (
+                  <li
+                    key={index + "arrayket"}
+                    className={
+                      "button-contact mx-2 flex size-10 cursor-pointer items-center justify-center rounded-full border text-center leading-[40px] transition-all duration-300 ease-in-out hover:bg-[#fef7f5] " +
+                      (index === page ? "gradient-secondary" : "bg-[#f2f2f2]")
+                    }
+                    onClick={() => setPage(index)}
+                  >
+                    <a className="page-numbers">{index + 1}</a>
+                  </li>
+                );
+              })}
+            {pages > 0 && (
+              <li
+                onClick={() => {
+                  if (page + 1 >= pages) return;
+                  setPage((state: number) => state + 1);
+                }}
+                className={
+                  "mx-2 flex size-10 cursor-pointer items-center justify-center rounded-full border bg-[#fef7f5] text-center leading-[40px] transition-all duration-300 ease-in-out " +
+                  (page + 1 >= pages ? "" : "hover:bg-[#f2f2f2]")
+                }
+              >
+                <a
+                  className={
+                    "next page-numbers " +
+                    (page + 1 >= pages ? " opacity-30" : " ")
+                  }
+                >
+                  {" "}
+                  <ChevronRightIcon className="size-3 text-black" />
+                </a>
+              </li>
+            )}
+          </ul>
+        </nav>
+      )}
+    </>
   );
 }

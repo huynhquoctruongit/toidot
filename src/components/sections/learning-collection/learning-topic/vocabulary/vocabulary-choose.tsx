@@ -30,6 +30,8 @@ export default function VocabularyChoose({
 
   const params = useSearchParams();
 
+  const [page, setPage] = useState(0);
+
   return (
     <>
       <div className="selection-choose flex max-w-full flex-wrap gap-4">
@@ -53,10 +55,6 @@ export default function VocabularyChoose({
 
         <WordVocabulary idCollection={idCollection} />
       </div>
-
-      <button className="see-more w-full rounded-[8px] border bg-white p-2 text-[#2E2E2E] text-opacity-80">
-        Xem thêm
-      </button>
     </>
   );
 }
