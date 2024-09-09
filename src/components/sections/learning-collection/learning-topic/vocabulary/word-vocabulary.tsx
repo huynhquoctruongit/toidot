@@ -52,7 +52,7 @@ export default function WordVocabulary({
   const params = convertParamToQuery(payload);
 
   const { data: words, error } = useSWR(
-    `/items/word?fields=*.*&offset=${payload.title ? offset : ""}&limit=${payload.title ? limit : -1}${payload.title ? "&meta=filter_count&filter_count" : ""}&filter=` +
+    `/items/word?fields=*.*&offset=${offset}&limit=${limit}&meta=filter_count&filter_count&filter=` +
       (payload.title ? JSON.stringify(params) : JSON.stringify(filters)),
     optionsFetch,
   );
