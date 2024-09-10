@@ -40,7 +40,7 @@ export default function ModalChooseDetail({
                   <span className="font-light">{itemWord.meanings}</span>
                 </div>
               </div>
-              <div className="flex w-full items-start justify-center">
+              <div className="flex w-full items-start justify-center md:h-[200px]">
                 {itemWord.image?.id ? (
                   <MyImage
                     src={itemWord.image?.id}

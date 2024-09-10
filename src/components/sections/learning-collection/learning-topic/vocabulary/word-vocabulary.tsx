@@ -37,7 +37,9 @@ export default function WordVocabulary({
     return payload;
   };
 
-  const filters = { _and: [{ topic: { collection: { id: { _eq: "1" } } } }] };
+  const filters = {
+    _and: [{ topic: { collection: { id: { _eq: idCollection } } } }],
+  };
 
   const data: any = useRef(null);
 
@@ -51,9 +53,12 @@ export default function WordVocabulary({
 
   const params = convertParamToQuery(payload);
 
+  const sort = payload.sort || "id";
+
   const { data: words, error } = useSWR(
     `/items/word?fields=*.*&offset=${offset}&limit=${limit}&meta=filter_count&filter_count&filter=` +
-      (payload.title ? JSON.stringify(params) : JSON.stringify(filters)),
+      (payload.title ? JSON.stringify(params) : JSON.stringify(filters)) +
+      (sort ? "&sort=" + sort : ""),
     optionsFetch,
   );
   if (words) data.current = words.data;
