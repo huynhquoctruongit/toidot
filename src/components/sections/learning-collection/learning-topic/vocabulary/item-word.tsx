@@ -6,9 +6,10 @@ import { IWord } from "@/types/word";
 type IProps = {
   word: IWord;
   onClick: (id: number) => void;
+  index: number;
 };
 
-export default function ItemWord({ word, onClick }: IProps) {
+export default function ItemWord({ word, onClick, index }: IProps) {
   return (
     <>
       <div

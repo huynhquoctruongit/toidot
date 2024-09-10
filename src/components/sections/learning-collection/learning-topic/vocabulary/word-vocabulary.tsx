@@ -81,15 +81,22 @@ export default function WordVocabulary({
       />
       <div className="learning-bottom grid grid-cols-4 gap-6">
         {words &&
-          (words.data || []).map((word: IWord) => (
+          (words.data || []).map((word: IWord, index: number) => (
             <div key={word.id}>
-              <ItemWord word={word} onClick={hanldeShowModalItemWord} />
+              <ItemWord
+                word={word}
+                onClick={hanldeShowModalItemWord}
+                index={index}
+              />
 
-              {idItemWord === word.id && (
+              {(idItemWord === word.id || idItemWord === index) && (
                 <ModalChooseDetail
                   isOpen={activeItemWord.value}
                   setOpen={activeItemWord.onFalse}
                   itemWord={word}
+                  setIdItemWord={setIdItemWord}
+                  index={index}
+                  limit={limit}
                 />
               )}
             </div>

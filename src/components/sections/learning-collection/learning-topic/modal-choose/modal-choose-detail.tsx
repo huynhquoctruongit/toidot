@@ -9,17 +9,25 @@ type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
   itemWord: IWord;
+  setIdItemWord: React.Dispatch<
+    React.SetStateAction<number | null | undefined>
+  >;
+  index: number;
+  limit: any;
 };
 
 export default function ModalChooseDetail({
   isOpen,
   setOpen,
   itemWord,
+  setIdItemWord,
+  index,
+  limit,
 }: IProps) {
   return (
     <>
       <Modal isOpen={isOpen} setOpen={setOpen} className="choose-detail">
-        <div className="max-w-[600px] rounded-[10px] border-[10px] border-[#F5F5F5] bg-white p-3">
+        <div className="w-[600px] rounded-[10px] border-[10px] border-[#F5F5F5] bg-white p-3">
           <div className="content">
             <div className="vocabulary-grammar-thumnail grid grid-flow-col items-center gap-5">
               <div className="vocabulary-grammar flex flex-col gap-3">
@@ -81,12 +89,22 @@ export default function ModalChooseDetail({
               </div>
             </div>
             <div className="btn-prev-next flex w-full justify-end gap-2">
-              <button className="prev flex size-10 items-center justify-center rounded-[6px] text-center">
+              <button
+                className={`prev flex size-10 items-center justify-center rounded-[6px] text-center ${index === 0 ? "cursor-not-allowed opacity-50" : "bg-[#ededed]"}`}
+                onClick={() => {
+                  if (index > 0) {
+                    setIdItemWord(index - 1);
+                  }
+                }}
+                disabled={index === 0}
+              >
                 <ChevronLeft strokeWidth={1} />
               </button>
               <button
-                className="next flex size-10 items-center justify-center rounded-[6px] bg-[#ededed]"
-                onClick={() => {}}
+                className={`next flex size-10 items-center justify-center rounded-[6px] ${index === limit - 1 ? "cursor-not-allowed opacity-50" : "bg-[#ededed]"}`}
+                onClick={() => {
+                  if (index < limit - 1) setIdItemWord(index + 1);
+                }}
               >
                 <ChevronRight strokeWidth={1} />
               </button>
