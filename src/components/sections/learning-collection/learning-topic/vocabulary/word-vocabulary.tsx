@@ -74,28 +74,12 @@ export default function WordVocabulary({
     setIdItemWord(id);
   };
 
-  function getRandomElement(arr: any) {
-    if (!arr) return;
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    return arr[randomIndex];
-  }
-
-  const [practiceWord, setPracticeWord] = useState({} as IWord);
-
-  const practice = useBoolean();
-
-  const onClickPractice = useCallback(() => {
-    const practiceDoingWord = getRandomElement(data.current);
-    setPracticeWord(practiceDoingWord);
-    practice.onTrue();
-  }, [practice, data.current]);
-
   return (
     <>
       <HeadVocabulary
         doingAction={doingAction}
         words={filter_count ? filter_count : length}
-        onClick={onClickPractice}
+        // onClick={onClickPractice}
       />
       <div className="learning-bottom grid grid-cols-4 gap-6">
         {words &&
@@ -124,13 +108,13 @@ export default function WordVocabulary({
         <Panigation page={page} setPage={setPage} pages={pages} />
       )}
 
-      <ModalChooseDoing
+      {/* <ModalChooseDoing
         isOpen={practice.value}
         setOpen={() => {
           practice.onFalse();
         }}
         word={practiceWord}
-      />
+      /> */}
     </>
   );
 }

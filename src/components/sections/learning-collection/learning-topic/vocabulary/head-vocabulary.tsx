@@ -8,7 +8,7 @@ export default function HeadVocabulary({
 }: {
   doingAction?: VoidFunction;
   words: any;
-  onClick: VoidFunction;
+  onClick?: VoidFunction;
 }) {
   return (
     <div className="learning-top flex items-center justify-between">
