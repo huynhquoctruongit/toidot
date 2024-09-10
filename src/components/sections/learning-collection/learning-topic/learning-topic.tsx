@@ -54,18 +54,6 @@ export default function LearningTopic({
         setPage={setPage}
       />
 
-      {/* <ModalChooseDoing
-        isOpen={doing.value}
-        setOpen={() => {
-          doing.onFalse();
-        }}
-        onClick={() => {
-          doing.onFalse();
-          doingAnswerSuccess.onTrue();
-        }}
-        setId={setId}
-      /> */}
-
       {/* ModalChooseDoingAnswerSuccess */}
       {/* <ModalChooseDoingAnswerSuccess
         isOpen={doingAnswerSuccess.value}

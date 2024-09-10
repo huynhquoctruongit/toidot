@@ -4,9 +4,11 @@ import React from "react";
 export default function HeadVocabulary({
   doingAction,
   words,
+  onClick,
 }: {
   doingAction?: VoidFunction;
   words: any;
+  onClick: VoidFunction;
 }) {
   return (
     <div className="learning-top flex items-center justify-between">
@@ -22,9 +24,7 @@ export default function HeadVocabulary({
           color="gradientPrimary"
           pill="roundedFull"
           spaceSide="default"
-          // onClick={() => {
-          //   doingAction();
-          // }}
+          onClick={onClick}
           className="text-[14px] text-white"
         >
           Luyện tập

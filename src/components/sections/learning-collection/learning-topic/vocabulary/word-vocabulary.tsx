@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { IWord } from "@/types/word";
 import ModalChooseDetail from "../modal-choose/modal-choose-detail";
 import { useBoolean } from "@/app/hook/use-boolean";
@@ -9,6 +9,7 @@ import { optionsFetch } from "@/lib/api/axios-client";
 import HeadVocabulary from "./head-vocabulary";
 import Panigation from "@/components/common/panigation";
 import ItemWord from "./item-word";
+import ModalChooseDoing from "../modal-choose/modal-choose-doing";
 
 type IProps = {
   idCollection: number;
@@ -73,11 +74,28 @@ export default function WordVocabulary({
     setIdItemWord(id);
   };
 
+  function getRandomElement(arr: any) {
+    if (!arr) return;
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  }
+
+  const [practiceWord, setPracticeWord] = useState({} as IWord);
+
+  const practice = useBoolean();
+
+  const onClickPractice = useCallback(() => {
+    const practiceDoingWord = getRandomElement(data.current);
+    setPracticeWord(practiceDoingWord);
+    practice.onTrue();
+  }, [practice, data.current]);
+
   return (
     <>
       <HeadVocabulary
         doingAction={doingAction}
         words={filter_count ? filter_count : length}
+        onClick={onClickPractice}
       />
       <div className="learning-bottom grid grid-cols-4 gap-6">
         {words &&
@@ -105,6 +123,14 @@ export default function WordVocabulary({
       {words && words.data.length > 0 && (
         <Panigation page={page} setPage={setPage} pages={pages} />
       )}
+
+      <ModalChooseDoing
+        isOpen={practice.value}
+        setOpen={() => {
+          practice.onFalse();
+        }}
+        word={practiceWord}
+      />
     </>
   );
 }

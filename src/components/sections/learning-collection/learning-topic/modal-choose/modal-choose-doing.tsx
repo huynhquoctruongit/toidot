@@ -3,6 +3,7 @@ import Modal from "@/components/modal";
 import { Loader2, Volume2 } from "lucide-react";
 import Image from "next/image";
 import Progress from "@/components/common/progress";
+import { IWord } from "@/types/word";
 
 type IChooseDoing = {
   id: string | number;
@@ -27,27 +28,21 @@ const chooseDoing: IChooseDoing[] = [
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
-  onClick: VoidFunction;
-  setId: Dispatch<SetStateAction<number>>;
+  word: IWord;
 };
 
-export default function ModalChooseDoing({
-  isOpen,
-  setOpen,
-  onClick,
-  setId,
-}: IProps) {
+export default function ModalChooseDoing({ isOpen, setOpen, word }: IProps) {
   return (
     <Modal isOpen={isOpen} setOpen={setOpen} className="choose-doing">
       <div className="min-w-[600px] rounded-[10px] border-[10px] border-[#F5F5F5] bg-white p-5">
         <div className="content-doing grid gap-4">
           <div className="vocabulary-grammar flex flex-col items-center gap-3">
             <div className="vocabulary text-gradient-1 text-3xl font-bold">
-              Sibling
+              {word.title}
             </div>
             <div className="flex items-center gap-3 text-[#226960]">
               <div className="translate rounded-full border border-dashed p-2 text-[14px]">
-                /ˈsɪblɪŋ/
+                {word.pronunciation}
               </div>
               <div className="rounded-full border border-dashed p-2">
                 <Volume2 className="size-5" />
@@ -67,10 +62,10 @@ export default function ModalChooseDoing({
               >
                 <div
                   className="size-[124px] rounded-[6px] border-[2px] border-dashed"
-                  onClick={() => {
-                    onClick();
-                    setId(Number(item.id));
-                  }}
+                  // onClick={() => {
+                  //   onClick();
+                  //   setId(Number(item.id));
+                  // }}
                 >
                   <Image
                     src="/images/Group 194.png"

@@ -13,7 +13,7 @@ type IProps = {
     React.SetStateAction<number | null | undefined>
   >;
   index: number;
-  limit: any;
+  limit: number;
 };
 
 export default function ModalChooseDetail({
