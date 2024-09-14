@@ -1,12 +1,12 @@
 import ButtonSpotlight from "@/components/common/button-spotlight";
-import { ITopicFilters } from "@/types/topic";
+import { ITopic, ITopicFilters } from "@/types/topic";
 import { CircleCheck, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type IProps = {
-  topic: string;
+  topic: ITopic;
   setOpen?: VoidFunction;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -19,7 +19,7 @@ export default function TabsTopic({ topic, setOpen, setPage }: IProps) {
   });
   const urlParams = new URLSearchParams({
     ...objParams,
-    title: topic,
+    id: topic.id,
   }).toString();
 
   return (
@@ -27,13 +27,13 @@ export default function TabsTopic({ topic, setOpen, setPage }: IProps) {
       <ButtonSpotlight
         pill="roundedFull"
         spaceSide="space"
-        className={`flex items-center border ${params.get("title") === topic ? "gradient-secondary text-white" : "bg-white"}`}
+        className={`flex items-center border ${params.get("id") === topic?.id?.toString() ? "gradient-secondary text-white" : "bg-white"}`}
         onClick={() => {
           setPage(0);
           if (setOpen) setOpen();
         }}
       >
-        <div className="text-base">{topic}</div>
+        <div className="text-base">{topic.title}</div>
       </ButtonSpotlight>
     </Link>
   );

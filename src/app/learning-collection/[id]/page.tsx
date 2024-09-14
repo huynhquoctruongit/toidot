@@ -35,3 +35,5 @@ export default async function BasicTopicPage({
     />
   );
 }
+
+export const revalidate = 3600;

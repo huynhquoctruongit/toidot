@@ -15,3 +15,5 @@ export default async function LearningPathPage() {
 
   return <SectionLearningCollection collection={collection.data} />;
 }
+
+export const revalidate = 3600;

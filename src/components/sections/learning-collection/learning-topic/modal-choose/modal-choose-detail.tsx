@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import Modal from "@/components/modal";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
-import { MyImage } from "@/components/common/image";
+import { MyImage, MySource } from "@/components/common/image";
 import { IWord } from "@/types/word";
 
 type IProps = {
@@ -24,6 +24,15 @@ export default function ModalChooseDetail({
   index,
   limit,
 }: IProps) {
+  const audioRef = useRef(null);
+
+  const onPlaying = () => {
+    if (audioRef.current) {
+      const audioElement = audioRef.current as HTMLAudioElement;
+      audioElement.play();
+    }
+  };
+
   return (
     <>
       <Modal isOpen={isOpen} setOpen={setOpen} className="choose-detail">
@@ -38,7 +47,15 @@ export default function ModalChooseDetail({
                   <div className="translate rounded-full border border-dashed p-2 text-[14px]">
                     {itemWord.pronunciation}
                   </div>
-                  <div className="rounded-full border border-dashed p-2">
+                  <div
+                    className="cursor-pointer rounded-full border border-dashed p-2"
+                    onClick={onPlaying}
+                  >
+                    <MySource
+                      audioRef={audioRef}
+                      src={itemWord.audio.id}
+                      type={itemWord.audio.type}
+                    />
                     <Volume2 className="size-5" />
                   </div>
                 </div>
@@ -54,7 +71,7 @@ export default function ModalChooseDetail({
                     src={itemWord.image?.id}
                     width={227}
                     height={202}
-                    className="relative flex h-full w-full items-center rounded object-cover"
+                    className="relative flex h-full w-full items-center rounded object-contain"
                   />
                 ) : (
                   <Image

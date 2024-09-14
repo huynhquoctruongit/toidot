@@ -41,7 +41,7 @@ export default function VocabularyChoose({
         </Link>
 
         {topics.map((topic) => (
-          <TabsTopic key={topic.id} topic={topic.title} setPage={setPage} />
+          <TabsTopic key={topic.id} topic={topic} setPage={setPage} />
         ))}
       </div>
 

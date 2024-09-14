@@ -31,7 +31,7 @@ export default function WordVocabulary({
   const convertParamToQuery = (params: any) => {
     const payload = {
       _and: [
-        { topic: { title: { _contains: params.title } } },
+        { topic: { id: { _eq: params.id } } },
         { topic: { collection: { id: { _eq: idCollection } } } },
       ],
     } as any;
@@ -58,9 +58,8 @@ export default function WordVocabulary({
 
   const { data: words, error } = useSWR(
     `/items/word?fields=*.*&offset=${offset}&limit=${limit}&meta=filter_count&filter_count&filter=` +
-      (payload.title ? JSON.stringify(params) : JSON.stringify(filters)) +
+      (payload.id ? JSON.stringify(params) : JSON.stringify(filters)) +
       (sort ? "&sort=" + sort : ""),
-    optionsFetch,
   );
   if (words) data.current = words.data;
   const filter_count = (words as any)?.meta?.filter_count || 0;

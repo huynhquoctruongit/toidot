@@ -41,6 +41,31 @@ export type IWord = {
   topic: ITopic;
   user_created: string;
   user_updated: string;
+  audio: {
+    charset: string;
+    description: string;
+    duration: string;
+    embed: string;
+    filename_disk: string;
+    filename_download: string;
+    filesize: string;
+    focal_point_x: string;
+    focal_point_y: string;
+    folder: string;
+    height: string;
+    id: string;
+    location: string;
+    metadata: string;
+    modified_by: string;
+    modified_on: string;
+    storage: string;
+    tags: string;
+    title: string;
+    type: string;
+    uploaded_by: string;
+    uploaded_on: string;
+    width: string;
+  };
 };
 
 type ExampleSentences = {

@@ -45,7 +45,7 @@ export default function ModalChooseTopic({
             {topics.map((topic) => (
               <TabsTopic
                 key={topic.id}
-                topic={topic.title}
+                topic={topic}
                 setOpen={setOpen}
                 setPage={setPage}
               />
