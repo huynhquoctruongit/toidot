@@ -28,7 +28,7 @@ const chooseDoing: IChooseDoing[] = [
 type IProps = {
   isOpen: boolean;
   setOpen: VoidFunction;
-  word: IWord;
+  word?: IWord;
 };
 
 export default function ModalChooseDoing({ isOpen, setOpen, word }: IProps) {
@@ -38,11 +38,11 @@ export default function ModalChooseDoing({ isOpen, setOpen, word }: IProps) {
         <div className="content-doing grid gap-4">
           <div className="vocabulary-grammar flex flex-col items-center gap-3">
             <div className="vocabulary text-gradient-1 text-3xl font-bold">
-              {word.title}
+              {word?.title}
             </div>
             <div className="flex items-center gap-3 text-[#226960]">
               <div className="translate rounded-full border border-dashed p-2 text-[14px]">
-                {word.pronunciation}
+                {word?.pronunciation}
               </div>
               <div className="rounded-full border border-dashed p-2">
                 <Volume2 className="size-5" />

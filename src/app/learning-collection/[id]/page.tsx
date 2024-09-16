@@ -1,8 +1,5 @@
 import LearningTopic from "@/components/sections/learning-collection/learning-topic/learning-topic";
 import AxiosClient from "@/lib/api/axios-client";
-import { ICollection } from "@/types/collection";
-import { ITopic } from "@/types/topic";
-import { IWord } from "@/types/word";
 
 import { Metadata } from "next";
 

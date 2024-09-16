@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import Modal from "@/components/modal";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
@@ -14,6 +14,7 @@ type IProps = {
   >;
   index: number;
   limit: number;
+  setNIndex: React.Dispatch<React.SetStateAction<number | null | undefined>>;
 };
 
 export default function ModalChooseDetail({
@@ -23,6 +24,7 @@ export default function ModalChooseDetail({
   setIdItemWord,
   index,
   limit,
+  setNIndex,
 }: IProps) {
   const audioRef = useRef(null);
 
@@ -32,6 +34,16 @@ export default function ModalChooseDetail({
       audioElement.play();
     }
   };
+
+  const hanhdlePrev = useCallback(() => {
+    if (index > 0) setIdItemWord(index - 1);
+  }, [setIdItemWord]);
+
+  const hanhdleNext = useCallback(() => {
+    if (index < limit - 1) setIdItemWord(index + 1);
+  }, [setIdItemWord]);
+
+  console.log("index", index);
 
   return (
     <>
@@ -48,7 +60,9 @@ export default function ModalChooseDetail({
                     {itemWord.pronunciation}
                   </div>
                   <div
-                    className="cursor-pointer rounded-full border border-dashed p-2"
+                    className={
+                      "cursor-pointer rounded-full border border-dashed p-2"
+                    }
                     onClick={onPlaying}
                   >
                     <MySource
@@ -103,25 +117,20 @@ export default function ModalChooseDetail({
                     </div>
                   </div>
                 ))}
+                0
               </div>
             </div>
             <div className="btn-prev-next flex w-full justify-end gap-2">
               <button
                 className={`prev flex size-10 items-center justify-center rounded-[6px] text-center ${index === 0 ? "cursor-not-allowed opacity-50" : "bg-[#ededed]"}`}
-                onClick={() => {
-                  if (index > 0) {
-                    setIdItemWord(index - 1);
-                  }
-                }}
+                onClick={hanhdlePrev}
                 disabled={index === 0}
               >
                 <ChevronLeft strokeWidth={1} />
               </button>
               <button
                 className={`next flex size-10 items-center justify-center rounded-[6px] ${index === limit - 1 ? "cursor-not-allowed opacity-50" : "bg-[#ededed]"}`}
-                onClick={() => {
-                  if (index < limit - 1) setIdItemWord(index + 1);
-                }}
+                onClick={hanhdleNext}
               >
                 <ChevronRight strokeWidth={1} />
               </button>

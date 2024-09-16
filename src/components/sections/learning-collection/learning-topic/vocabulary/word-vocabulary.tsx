@@ -15,18 +15,20 @@ type IProps = {
   idCollection: number;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  doingAction?: VoidFunction;
 };
 
 export default function WordVocabulary({
   idCollection,
   page,
   setPage,
-  doingAction,
 }: IProps) {
   const activeItemWord = useBoolean();
 
+  const practice = useBoolean();
+
   const [idItemWord, setIdItemWord] = useState<number | null>();
+
+  const [nIndex, setNIndex] = useState<number | null>();
 
   const convertParamToQuery = (params: any) => {
     const payload = {
@@ -76,9 +78,10 @@ export default function WordVocabulary({
   return (
     <>
       <HeadVocabulary
-        doingAction={doingAction}
         words={filter_count ? filter_count : length}
-        // onClick={onClickPractice}
+        onClick={() => {
+          practice.onTrue();
+        }}
       />
       <div className="learning-bottom grid grid-cols-4 gap-6">
         {words &&
@@ -98,6 +101,7 @@ export default function WordVocabulary({
                   setIdItemWord={setIdItemWord}
                   index={index}
                   limit={limit}
+                  setNIndex={setNIndex}
                 />
               )}
             </div>
@@ -107,13 +111,13 @@ export default function WordVocabulary({
         <Panigation page={page} setPage={setPage} pages={pages} />
       )}
 
-      {/* <ModalChooseDoing
+      <ModalChooseDoing
         isOpen={practice.value}
         setOpen={() => {
           practice.onFalse();
         }}
-        word={practiceWord}
-      /> */}
+        // word={practiceWord}
+      />
     </>
   );
 }

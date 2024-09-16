@@ -8,7 +8,6 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
 type IProps = {
-  doingAction?: VoidFunction;
   topics: ITopic[];
   idCollection: number;
   page: number;
@@ -17,7 +16,6 @@ type IProps = {
 
 //------------------------------------------
 export default function VocabularyChoose({
-  doingAction,
   topics,
   idCollection,
   page,
@@ -50,7 +48,6 @@ export default function VocabularyChoose({
           idCollection={idCollection}
           page={page}
           setPage={setPage}
-          doingAction={doingAction}
         />
       </div>
     </>

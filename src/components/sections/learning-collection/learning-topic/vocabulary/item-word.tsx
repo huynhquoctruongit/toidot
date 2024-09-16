@@ -16,6 +16,7 @@ export default function ItemWord({ word, onClick, index }: IProps) {
         className="cursor-pointer rounded-[8px] border"
         onClick={() => {
           onClick(word.id);
+          console.log("index", index);
         }}
       >
         <div className="grid grid-cols-3">

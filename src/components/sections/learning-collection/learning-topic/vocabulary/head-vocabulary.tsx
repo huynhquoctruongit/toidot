@@ -2,11 +2,9 @@ import ButtonSpotlight from "@/components/common/button-spotlight";
 import React from "react";
 
 export default function HeadVocabulary({
-  doingAction,
   words,
   onClick,
 }: {
-  doingAction?: VoidFunction;
   words: any;
   onClick?: VoidFunction;
 }) {
