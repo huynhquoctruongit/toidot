@@ -14,7 +14,6 @@ type IProps = {
   >;
   index: number;
   limit: number;
-  setNIndex: React.Dispatch<React.SetStateAction<number | null | undefined>>;
 };
 
 export default function ModalChooseDetail({
@@ -24,7 +23,6 @@ export default function ModalChooseDetail({
   setIdItemWord,
   index,
   limit,
-  setNIndex,
 }: IProps) {
   const audioRef = useRef(null);
 
@@ -42,8 +40,6 @@ export default function ModalChooseDetail({
   const hanhdleNext = useCallback(() => {
     if (index < limit - 1) setIdItemWord(index + 1);
   }, [setIdItemWord]);
-
-  console.log("index", index);
 
   return (
     <>

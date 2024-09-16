@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 export default function Progress() {
-  const inittial = 15;
+  const inittial = 10;
 
   const [percentage, setPercentage] = useState<number>(inittial);
   const radius = 20;

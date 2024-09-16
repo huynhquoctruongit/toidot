@@ -28,8 +28,6 @@ export default function WordVocabulary({
 
   const [idItemWord, setIdItemWord] = useState<number | null>();
 
-  const [nIndex, setNIndex] = useState<number | null>();
-
   const convertParamToQuery = (params: any) => {
     const payload = {
       _and: [
@@ -67,7 +65,6 @@ export default function WordVocabulary({
   const filter_count = (words as any)?.meta?.filter_count || 0;
   const pages: number = Math.ceil(filter_count / limit);
   const isLoading = !error && !words;
-
   const length = words?.data.length;
 
   const hanldeShowModalItemWord = (id: number) => {
@@ -75,13 +72,42 @@ export default function WordVocabulary({
     setIdItemWord(id);
   };
 
+  function getRandomElement(arr: any) {
+    if (!arr) return;
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  }
+
+  const [practiceWord, setPracticeWord] = useState([] as IWord[]);
+
+  function getRandomUniqueElements(arr: any, numElements: any) {
+    let result = [];
+    let tempArray = [...arr]; // Tạo một bản sao của mảng ban đầu để không thay đổi mảng gốc
+
+    for (let i = 0; i < numElements; i++) {
+      // Lấy chỉ số ngẫu nhiên
+      const randomIndex = Math.floor(Math.random() * tempArray.length);
+
+      // Lấy phần tử ngẫu nhiên và loại bỏ nó khỏi mảng tạm thời
+      const randomElement = tempArray.splice(randomIndex, 1)[0];
+
+      result.push(randomElement);
+    }
+
+    return result;
+  }
+
+  const onClickPractice = useCallback(() => {
+    const practiceDoingWord = getRandomUniqueElements(data.current, 3);
+    setPracticeWord(practiceDoingWord);
+    practice.onTrue();
+  }, [practice, data.current]);
+
   return (
     <>
       <HeadVocabulary
         words={filter_count ? filter_count : length}
-        onClick={() => {
-          practice.onTrue();
-        }}
+        onClick={onClickPractice}
       />
       <div className="learning-bottom grid grid-cols-4 gap-6">
         {words &&
@@ -101,7 +127,6 @@ export default function WordVocabulary({
                   setIdItemWord={setIdItemWord}
                   index={index}
                   limit={limit}
-                  setNIndex={setNIndex}
                 />
               )}
             </div>
@@ -116,7 +141,8 @@ export default function WordVocabulary({
         setOpen={() => {
           practice.onFalse();
         }}
-        // word={practiceWord}
+        word={practiceWord[0]}
+        practiceWord={practiceWord}
       />
     </>
   );
