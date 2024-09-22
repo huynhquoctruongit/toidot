@@ -119,7 +119,7 @@ export default function WordVocabulary({
                 index={index}
               />
 
-              {(idItemWord === word.id || idItemWord === index) && (
+              {idItemWord === index && (
                 <ModalChooseDetail
                   isOpen={activeItemWord.value}
                   setOpen={activeItemWord.onFalse}
