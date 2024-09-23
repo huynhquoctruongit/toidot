@@ -18,6 +18,7 @@ import {
 import { Metadata } from "next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
 
 export const metadata: Metadata = {
   title: "Tôi dốt",
@@ -27,10 +28,16 @@ export const metadata: Metadata = {
 
 export default function SectionHome() {
   const router = useRouter();
+  const { data: words } = useSWR("/items/word?aggregate[count]=*");
+  const { data: answers } = useSWR("/items/vocab_anwer?aggregate[count]=*");
+
+  const lengthWords = (words?.data || []).map((item: any) => item.count);
+
+  const lengthAnswer = (answers?.data || []).map((item: any) => item.count);
 
   return (
     <>
-      <div className="content relative z-10 h-[calc(100vh-76px)]">
+      <div className="content relative z-10 h-[calc(100vh-76px)] overflow-hidden">
         <div className="flex h-full flex-col items-center justify-between">
           <div className="text-[20px]">Chào mừng cậu đến với</div>
           <div className="text-[40px] font-bold text-[#2b2b2b]">Tôi dốt</div>
@@ -70,7 +77,9 @@ export default function SectionHome() {
               <ButtonCommon color="secondary" className="w-[200px]">
                 <GraduationCap className="size-6 bg-transparent stroke-[1.5] text-[#DE543D] opacity-40" />
                 <div className="leading-6">Hôm nay có</div>
-                <div className="text-2xl font-bold leading-9">200</div>
+                <div className="text-2xl font-bold leading-9">
+                  {lengthAnswer}
+                </div>
                 <div className="leading-6">bài tập đã làm</div>
               </ButtonCommon>
 
@@ -78,7 +87,7 @@ export default function SectionHome() {
                 <BookA className="size-6 bg-transparent stroke-[1.5] text-[#DE543D] opacity-40" />
                 <div className="leading-6">Kho từ vựng</div>
                 <div className="text-2xl font-bold leading-9">
-                  3000
+                  {lengthWords}
                   <span className="text-base font-light">&nbsp;từ</span>
                 </div>
                 <div className="leading-6">làm tẹt ga giường</div>

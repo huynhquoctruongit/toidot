@@ -1,17 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 import { ICollection } from "@/types/collection";
+import useSWR from "swr";
 
-type IProps = {
-  collection: ICollection[];
-};
-
-export default function SectionLearningCollection({ collection }: IProps) {
+export default function SectionLearningCollection() {
   const router = useRouter();
+  const { data } = useSWR("/items/collection?fields=*");
+  const [collection, setCollection] = useState<ICollection[]>([]);
+
+  useEffect(() => {
+    setCollection(data?.data);
+  }, [data?.data]);
 
   return (
     <div className="content container mx-auto">
@@ -36,7 +39,7 @@ export default function SectionLearningCollection({ collection }: IProps) {
             ChatGPT
           </div>
         </div>
-        {collection.map((item: any) => (
+        {(collection || []).map((item: any) => (
           <div className="basic-topic grid gap-3" key={item.id}>
             <div className="title-basic flex items-center justify-between">
               <div className="flex items-center">

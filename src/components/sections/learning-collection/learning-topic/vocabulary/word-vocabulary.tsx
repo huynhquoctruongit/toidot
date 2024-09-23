@@ -58,7 +58,7 @@ export default function WordVocabulary({
   const sort = payload.sort || "id";
 
   const { data: words } = useSWR(
-    `/items/word?fields=*.*&offset=${offset}&limit=${limit}&meta=filter_count&filter_count&filter=` +
+    `/items/word?fields=*.*&offset=${offset}&limit=${limit}&meta=filter_count&filter=` +
       (payload.id ? JSON.stringify(params) : JSON.stringify(filters)) +
       (sort ? "&sort=" + sort : ""),
   );

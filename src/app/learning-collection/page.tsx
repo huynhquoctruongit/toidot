@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function LearningPathPage() {
-  const collection = await AxiosClient.get("/items/collection?fields=*");
-
-  return <SectionLearningCollection collection={collection.data} />;
+  return <SectionLearningCollection />;
 }
 
 export const revalidate = 3600;

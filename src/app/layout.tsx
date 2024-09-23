@@ -16,6 +16,7 @@ const background = {
   backgroundImage: `url("/images/image 12.png")`,
   backgroundRepeat: "repeat",
   backgroundSize: "contain",
+  overflow: "hidden ",
 };
 
 export default function RootLayout({
