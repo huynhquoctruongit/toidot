@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { IWord } from "@/types/word";
 import ModalChooseDetail from "../modal-choose/modal-choose-detail";
 import { useBoolean } from "@/app/hook/use-boolean";
 import { useSearchParams } from "next/navigation";
 import { URLparamsToObject } from "@/middleware/helper";
 import useSWR from "swr";
-import { optionsFetch } from "@/lib/api/axios-client";
+
 import HeadVocabulary from "./head-vocabulary";
 import Panigation from "@/components/common/panigation";
 import ItemWord from "./item-word";
 import ModalChooseDoing from "../modal-choose/modal-choose-doing";
+import { IWordAnswer } from "@/types/word-answer";
 
 type IProps = {
   idCollection: number;
@@ -56,7 +57,7 @@ export default function WordVocabulary({
 
   const sort = payload.sort || "id";
 
-  const { data: words, error } = useSWR(
+  const { data: words } = useSWR(
     `/items/word?fields=*.*&offset=${offset}&limit=${limit}&meta=filter_count&filter_count&filter=` +
       (payload.id ? JSON.stringify(params) : JSON.stringify(filters)) +
       (sort ? "&sort=" + sort : ""),
@@ -64,7 +65,6 @@ export default function WordVocabulary({
   if (words) data.current = words.data;
   const filter_count = (words as any)?.meta?.filter_count || 0;
   const pages: number = Math.ceil(filter_count / limit);
-  const isLoading = !error && !words;
   const length = words?.data.length;
 
   const hanldeShowModalItemWord = (id: number) => {
@@ -72,36 +72,40 @@ export default function WordVocabulary({
     setIdItemWord(id);
   };
 
-  function getRandomElement(arr: any) {
-    if (!arr) return;
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    return arr[randomIndex];
-  }
-
   const [practiceWord, setPracticeWord] = useState([] as IWord[]);
 
   function getRandomUniqueElements(arr: any, numElements: any) {
-    let result = [];
-    let tempArray = [...arr]; // Tạo một bản sao của mảng ban đầu để không thay đổi mảng gốc
-
+    const result = [];
+    const tempArray = [...arr];
     for (let i = 0; i < numElements; i++) {
-      // Lấy chỉ số ngẫu nhiên
       const randomIndex = Math.floor(Math.random() * tempArray.length);
-
-      // Lấy phần tử ngẫu nhiên và loại bỏ nó khỏi mảng tạm thời
       const randomElement = tempArray.splice(randomIndex, 1)[0];
-
       result.push(randomElement);
     }
 
     return result;
   }
 
+  const filtersVocabAnwer = {
+    _and: [{ correct: { _eq: true } }],
+  };
+
+  const { data: vocabAnwer, mutate } = useSWR(
+    `/items/vocab_anwer?fields=*.*&filter=${JSON.stringify(filtersVocabAnwer)} `,
+  );
+
+  const filteredWords = words?.data.filter(
+    (word: IWord) =>
+      !vocabAnwer?.data.some(
+        (answer: IWordAnswer) => answer.word.id === word.id,
+      ),
+  );
+
   const onClickPractice = useCallback(() => {
-    const practiceDoingWord = getRandomUniqueElements(data.current, 3);
+    const practiceDoingWord = getRandomUniqueElements(filteredWords, 3);
     setPracticeWord(practiceDoingWord);
     practice.onTrue();
-  }, [practice, data.current]);
+  }, [practice]);
 
   return (
     <>
@@ -140,6 +144,7 @@ export default function WordVocabulary({
         isOpen={practice.value}
         setOpen={() => {
           practice.onFalse();
+          mutate();
         }}
         word={practiceWord[0]}
         practiceWord={practiceWord}

@@ -1,16 +1,10 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useRef,
-  useState,
-} from "react";
+import React, { useRef } from "react";
 import Modal from "@/components/modal";
 import { Volume2 } from "lucide-react";
-import Image from "next/image";
-import Progress from "@/components/common/progress";
+
 import { IWord } from "@/types/word";
-import { MyImage, MySource } from "@/components/common/image";
+import { MySource } from "@/components/common/image";
+import ChooseActionDoing from "./choose-action-doing";
 
 type IProps = {
   isOpen: boolean;
@@ -60,49 +54,13 @@ export default function ModalChooseDoing({
                 <Volume2 className="size-5" />
               </div>
             </div>
-            <div className="progress-timing">
-              <Progress />
-            </div>
-          </div>
-          <div className="thumbnail grid grid-flow-col gap-10">
-            {practiceWord
-              .sort(() => Math.random() - 0.5)
-              .map((item) => (
-                <ChooseAction key={item.id} item={item} idWord={word.id} />
-              ))}
+            <ChooseActionDoing
+              practiceWord={practiceWord.sort(() => Math.random() - 0.5)}
+              word={word}
+            />
           </div>
         </div>
       </div>
     </Modal>
-  );
-}
-
-function ChooseAction({ item, idWord }: { item: IWord; idWord: number }) {
-  return (
-    <div className="flex cursor-pointer flex-col items-center gap-3">
-      <div
-        className={`size-[124px] rounded-[6px] border-[2px] border-dashed p-1`}
-      >
-        {item.image?.id ? (
-          <MyImage
-            src={item.image?.id}
-            width={120}
-            height={120}
-            className="relative flex h-full w-full items-center rounded object-cover"
-          />
-        ) : (
-          <Image
-            src="/images/fan.png"
-            alt="logo"
-            width={120}
-            height={120}
-            priority
-            quality={100}
-            className="flex h-[200px] w-full items-center object-cover"
-          />
-        )}
-      </div>
-      <div className="max-w-[124px] text-center">{item.meanings}</div>
-    </div>
   );
 }
