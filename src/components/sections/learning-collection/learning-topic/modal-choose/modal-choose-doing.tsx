@@ -57,6 +57,7 @@ export default function ModalChooseDoing({
             <ChooseActionDoing
               practiceWord={practiceWord.sort(() => Math.random() - 0.5)}
               word={word}
+              setOpen={setOpen}
             />
           </div>
         </div>

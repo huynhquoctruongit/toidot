@@ -9,9 +9,11 @@ import AxiosClient from "@/lib/api/axios-client";
 export default function ChooseActionDoing({
   practiceWord,
   word,
+  setOpen,
 }: {
   practiceWord: IWord[];
   word: IWord;
+  setOpen: VoidFunction;
 }) {
   const timeoutId = useRef<NodeJS.Timeout>();
 
@@ -48,8 +50,14 @@ export default function ChooseActionDoing({
           word.id === item.id && word.title === item.title ? true : false,
         extra: `{ "duration": ${percentage}, "question": "${word.title}", "answer": "${item.title}" }`,
       });
+      setTimeout(() => {
+        setOpen();
+      }, 4000);
     } catch (error) {
       console.log(error);
+      setTimeout(() => {
+        setOpen();
+      }, 4000);
     }
   };
 
