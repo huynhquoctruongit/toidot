@@ -1,28 +1,21 @@
+"use client";
+import Spin from "@/components/common/spin";
 import LearningTopic from "@/components/sections/learning-collection/learning-topic/learning-topic";
 import AxiosClient from "@/lib/api/axios-client";
+import useSWR from "swr";
 
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Chủ đề cơ bản",
-  description: "Chủ đề cơ bản",
-  keywords: "Chủ đề cơ bản",
-};
-
-export default async function BasicTopicPage({
-  params,
-}: {
-  params: { id: any };
-}) {
+export default function BasicTopicPage({ params }: { params: { id: any } }) {
   const { id } = params;
 
-  const topics = await AxiosClient.get(
+  const { data: topics, isLoading: loadingTopics } = useSWR(
     `/items/topic?fields=*.*&filter[collection][_eq]=${id}`,
   );
 
-  const collections = await AxiosClient.get(
+  const { data: collections, isLoading: loadingCollections } = useSWR(
     `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
   );
+
+  if (loadingTopics || loadingCollections) return <Spin />;
 
   return (
     <LearningTopic
@@ -32,5 +25,3 @@ export default async function BasicTopicPage({
     />
   );
 }
-
-export const revalidate = 3600;

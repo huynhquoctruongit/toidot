@@ -80,7 +80,7 @@ export default function ModalChooseDetail({
                   <MyImage
                     src={itemWord.image?.id}
                     width={227}
-                    height={202}
+                    height={200}
                     className="relative flex h-full w-full items-center rounded object-contain"
                   />
                 ) : (
@@ -113,7 +113,6 @@ export default function ModalChooseDetail({
                     </div>
                   </div>
                 ))}
-                0
               </div>
             </div>
             <div className="btn-prev-next flex w-full justify-end gap-2">

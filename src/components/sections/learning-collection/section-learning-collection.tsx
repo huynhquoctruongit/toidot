@@ -1,20 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
-import { ICollection } from "@/types/collection";
 import useSWR from "swr";
+import Spin from "@/components/common/spin";
+import { useState } from "react";
 
 export default function SectionLearningCollection() {
   const router = useRouter();
-  const { data } = useSWR("/items/collection?fields=*");
-  const [collection, setCollection] = useState<ICollection[]>([]);
+  const { data: collection, isLoading } = useSWR("/items/collection?fields=*");
+  const [active, setActive] = useState(false);
 
-  useEffect(() => {
-    setCollection(data?.data);
-  }, [data?.data]);
+  if (isLoading && active) return <Spin />;
 
   return (
     <div className="content container mx-auto">
@@ -39,7 +37,7 @@ export default function SectionLearningCollection() {
             ChatGPT
           </div>
         </div>
-        {(collection || []).map((item: any) => (
+        {(collection?.data || []).map((item: any) => (
           <div className="basic-topic grid gap-3" key={item.id}>
             <div className="title-basic flex items-center justify-between">
               <div className="flex items-center">
@@ -61,6 +59,7 @@ export default function SectionLearningCollection() {
                 className="text-[14px] text-white"
                 spaceSide="default"
                 onClick={() => {
+                  setActive(true);
                   router.push(`/learning-collection/${item.id}`);
                 }}
               >

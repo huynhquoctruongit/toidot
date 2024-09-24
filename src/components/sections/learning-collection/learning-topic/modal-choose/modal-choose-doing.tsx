@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "@/components/modal";
-import { Volume2 } from "lucide-react";
+import { ChevronRight, Volume2 } from "lucide-react";
 
 import { IWord } from "@/types/word";
 import { MySource } from "@/components/common/image";
@@ -11,6 +11,7 @@ type IProps = {
   setOpen: VoidFunction;
   word: IWord;
   practiceWord: IWord[];
+  onClick: VoidFunction;
 };
 
 export default function ModalChooseDoing({
@@ -18,6 +19,7 @@ export default function ModalChooseDoing({
   setOpen,
   word,
   practiceWord,
+  onClick,
 }: IProps) {
   const audioRef = useRef(null);
 
@@ -30,7 +32,7 @@ export default function ModalChooseDoing({
 
   return (
     <Modal isOpen={isOpen} setOpen={setOpen} className="choose-doing">
-      <div className="min-w-[600px] rounded-[10px] border-[10px] border-[#F5F5F5] bg-white p-5">
+      <div className="relative min-w-[600px] rounded-[10px] border-[10px] border-[#F5F5F5] bg-white p-5">
         <div className="content-doing grid gap-4">
           <div className="vocabulary-grammar flex flex-col items-center gap-3">
             <div className="vocabulary text-gradient-1 text-3xl font-bold">
@@ -60,6 +62,14 @@ export default function ModalChooseDoing({
               setOpen={setOpen}
             />
           </div>
+        </div>
+        <div className="absolute right-5 top-5">
+          <button
+            className={`prev flex size-10 items-center justify-center rounded-[6px] bg-[#ededed] text-center opacity-50`}
+            onClick={onClick}
+          >
+            <ChevronRight strokeWidth={1} />
+          </button>
         </div>
       </div>
     </Modal>

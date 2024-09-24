@@ -101,11 +101,16 @@ export default function WordVocabulary({
       ),
   );
 
-  const onClickPractice = useCallback(() => {
-    const practiceDoingWord = getRandomUniqueElements(filteredWords, 3);
+  const practiceDoingWord = getRandomUniqueElements(filteredWords, 3);
+
+  const onClickPractice = () => {
     setPracticeWord(practiceDoingWord);
     practice.onTrue();
-  }, [practice]);
+  };
+
+  const onClickNextQuestion = () => {
+    practice.onFalse();
+  };
 
   return (
     <>
@@ -148,6 +153,7 @@ export default function WordVocabulary({
         }}
         word={practiceWord[0]}
         practiceWord={practiceWord}
+        onClick={onClickNextQuestion}
       />
     </>
   );

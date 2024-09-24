@@ -50,14 +50,8 @@ export default function ChooseActionDoing({
           word.id === item.id && word.title === item.title ? true : false,
         extra: `{ "duration": ${percentage}, "question": "${word.title}", "answer": "${item.title}" }`,
       });
-      setTimeout(() => {
-        setOpen();
-      }, 4000);
     } catch (error) {
       console.log(error);
-      setTimeout(() => {
-        setOpen();
-      }, 4000);
     }
   };
 

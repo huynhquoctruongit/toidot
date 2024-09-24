@@ -2,6 +2,7 @@
 import Button from "@/components/common/button";
 import ButtonCommon from "@/components/common/button-common";
 import ButtonSpotlight from "@/components/common/button-spotlight";
+import Spin from "@/components/common/spin";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import {
   BookA,

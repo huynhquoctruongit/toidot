@@ -1162,13 +1162,6 @@ input[type="number"] {
   opacity: 0.5;
 }
 
-/* code progress chart */
-.app1 {
-  --color1: #12c2e9;
-  --color2: #c471ed;
-  --color3: #f64f59;
-}
-
 .circle-backgroud {
   fill: none;
   stroke: #ddd;
@@ -1182,4 +1175,56 @@ input[type="number"] {
   font-size: 16px;
   font-weight: bold;
   fill: #226960;
+}
+
+.loader {
+  width: 56px;
+  height: 56px;
+  background: #226960;
+  animation: rotate 1s linear infinite;
+  opacity: 0.6;
+}
+.circle {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 0%;
+  left: 0%;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 1px solid #ecdedc;
+  border-radius: 50%;
+  animation: circle-rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(0.2);
+    border-radius: 10%;
+  }
+  50% {
+    transform: rotate(180deg) scale(2);
+    border-radius: 50%;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.2);
+    border-radius: 10%;
+  }
+}
+
+@keyframes circle-rotate {
+  0% {
+    transform: rotate(0deg) scale(0.2);
+    border-radius: 50%;
+  }
+  50% {
+    transform: rotate(180deg) scale(2);
+    border-radius: 20%;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.2);
+    border-radius: 50%;
+  }
 }
