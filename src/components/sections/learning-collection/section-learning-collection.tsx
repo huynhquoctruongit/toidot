@@ -12,7 +12,7 @@ export default function SectionLearningCollection() {
   const { data: collection, isLoading } = useSWR("/items/collection?fields=*");
   const [active, setActive] = useState(false);
 
-  if (isLoading && active) return <Spin />;
+  if (isLoading || active) return <Spin />;
 
   return (
     <div className="content container mx-auto">
