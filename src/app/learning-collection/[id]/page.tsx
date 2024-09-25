@@ -1,7 +1,7 @@
 "use client";
-import Spin from "@/components/common/spin";
+
+import SplashScreen from "@/components/common/splash-screen";
 import LearningTopic from "@/components/sections/learning-collection/learning-topic/learning-topic";
-import AxiosClient from "@/lib/api/axios-client";
 import useSWR from "swr";
 
 export default function BasicTopicPage({ params }: { params: { id: any } }) {
@@ -15,7 +15,7 @@ export default function BasicTopicPage({ params }: { params: { id: any } }) {
     `/items/collection?fields=*.*&filter[id][_eq]=${id}`,
   );
 
-  if (loadingTopics || loadingCollections) return <Spin />;
+  if (loadingTopics || loadingCollections) return <SplashScreen />;
 
   return (
     <LearningTopic

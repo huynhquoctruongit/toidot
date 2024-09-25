@@ -1,18 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ButtonSpotlight from "@/components/common/button-spotlight";
 import ButtonCommon from "@/components/common/button-common";
 import useSWR from "swr";
-import Spin from "@/components/common/spin";
-import { useState } from "react";
+import SplashScreen from "@/components/common/splash-screen";
 
 export default function SectionLearningCollection() {
   const router = useRouter();
   const { data: collection, isLoading } = useSWR("/items/collection?fields=*");
   const [active, setActive] = useState(false);
 
-  if (isLoading || active) return <Spin />;
+  if (isLoading || active) return <SplashScreen />;
 
   return (
     <div className="content container mx-auto">

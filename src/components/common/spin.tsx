@@ -1,12 +1,8 @@
-const Spin = () => {
-  return (
-    <div className="absolute left-0 top-0 z-[99] h-full w-full">
-      <div className="flex size-full items-center justify-center bg-white backdrop-blur-[1px]">
-        <div className="circle"></div>
-        <div className="loader"></div>
-      </div>
-    </div>
-  );
+import { cn } from "@/lib/utils";
+import { LoaderCircle } from "lucide-react";
+
+const Spin = ({ className }: any) => {
+  return <LoaderCircle className={cn("h-4 w-4 animate-spin", className)} />;
 };
 
 export default Spin;
