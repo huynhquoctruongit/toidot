@@ -5,15 +5,16 @@ import Progress from "@/components/common/progress";
 import { IWord } from "@/types/word";
 import { MyImage } from "@/components/common/image";
 import AxiosClient from "@/lib/api/axios-client";
+import { ChevronRight } from "lucide-react";
 
 export default function ChooseActionDoing({
   practiceWord,
   word,
-  setOpen,
+  onClick,
 }: {
   practiceWord: IWord[];
   word: IWord;
-  setOpen: VoidFunction;
+  onClick: VoidFunction;
 }) {
   const timeoutId = useRef<NodeJS.Timeout>();
 
@@ -81,6 +82,8 @@ export default function ChooseActionDoing({
             active={active}
             disabled={disabled}
             choose={choose}
+            percentage={percentage}
+            onClick={onClick}
           />
         ))}
       </div>
@@ -94,13 +97,18 @@ function ChooseAction({
   hanldeAnswer,
   disabled,
   choose,
+  percentage,
+  onClick,
 }: {
   item: IWord;
   active: number | null;
   hanldeAnswer: (item: IWord) => void;
   disabled: boolean;
   choose: number | null;
+  percentage: number;
+  onClick: VoidFunction;
 }) {
+  const [activeOpacity, setActiveOpacity] = useState(false);
   return (
     <>
       {item?.image?.id && (
@@ -120,6 +128,19 @@ function ChooseAction({
             />
           </button>
           <div className="max-w-[124px] text-center">{item?.meanings}</div>
+        </div>
+      )}
+      {(active === item.id || choose === item.id || percentage === 0) && (
+        <div className="absolute right-5 top-5">
+          <button
+            className={`prev flex size-10 items-center justify-center rounded-[6px] bg-[#ededed] text-center ${activeOpacity ? "opacity-50" : "opacity-100"}`}
+            onClick={() => {
+              onClick();
+              setActiveOpacity(true);
+            }}
+          >
+            <ChevronRight strokeWidth={1} opacity={0.7} />
+          </button>
         </div>
       )}
     </>

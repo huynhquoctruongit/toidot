@@ -11,6 +11,7 @@ import Panigation from "@/components/common/panigation";
 import ItemWord from "./item-word";
 import ModalChooseDoing from "../modal-choose/modal-choose-doing";
 import { IWordAnswer } from "@/types/word-answer";
+import { setInterval } from "timers/promises";
 
 type IProps = {
   idCollection: number;
@@ -101,16 +102,21 @@ export default function WordVocabulary({
       ),
   );
 
-  const practiceDoingWord = getRandomUniqueElements(filteredWords, 3);
-
-  const onClickPractice = () => {
+  const onClickPractice = useCallback(() => {
+    const practiceDoingWord = getRandomUniqueElements(filteredWords, 3);
     setPracticeWord(practiceDoingWord);
     practice.onTrue();
-  };
+  }, [filteredWords, practice, setPracticeWord]);
 
-  const onClickNextQuestion = () => {
+  const nextQuestion = useCallback(() => {
+    setPracticeWord([]);
     practice.onFalse();
-  };
+    setTimeout(() => {
+      const practiceDoingWord = getRandomUniqueElements(filteredWords, 3);
+      setPracticeWord(practiceDoingWord);
+      practice.onTrue();
+    }, 500);
+  }, [filteredWords, practice, setPracticeWord]);
 
   return (
     <>
@@ -148,12 +154,11 @@ export default function WordVocabulary({
       <ModalChooseDoing
         isOpen={practice.value}
         setOpen={() => {
-          practice.onFalse();
-          mutate();
+          practice.onFalse(), mutate();
         }}
         word={practiceWord[0]}
         practiceWord={practiceWord}
-        onClick={onClickNextQuestion}
+        onClick={nextQuestion}
       />
     </>
   );
