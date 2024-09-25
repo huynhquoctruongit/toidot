@@ -11,7 +11,6 @@ import Panigation from "@/components/common/panigation";
 import ItemWord from "./item-word";
 import ModalChooseDoing from "../modal-choose/modal-choose-doing";
 import { IWordAnswer } from "@/types/word-answer";
-import { setInterval } from "timers/promises";
 
 type IProps = {
   idCollection: number;
