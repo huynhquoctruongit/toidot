@@ -4,7 +4,7 @@ import ButtonSpotlight from "@/components/common/button-spotlight";
 import { ITopic } from "@/types/topic";
 import TabsTopic from "../vocabulary/tabs-topic";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type IProps = {
   isOpen: boolean;
@@ -20,6 +20,7 @@ export default function ModalChooseTopic({
   setPage,
 }: IProps) {
   const pathname = usePathname();
+
   const params = useSearchParams();
   return (
     <Modal isOpen={isOpen} setOpen={setOpen} className="choose-topic">
@@ -30,16 +31,16 @@ export default function ModalChooseTopic({
             Chọn chủ đề để bắt đầu luyện tập ngay
           </div>
           <div className="flex max-w-full flex-wrap gap-4">
-            <Link href={pathname} className="rounded-full border">
+            <Link href={pathname}>
               <ButtonSpotlight
                 pill="roundedFull"
-                spaceSide="space"
-                className={`flex items-center ${pathname === pathname + params.toString() ? "gradient-secondary text-white" : "bg-white"}`}
+                spaceSide="space_3"
+                className={`flex items-center border ${pathname === pathname + params.toString() ? "gradient-secondary text-white" : "bg-white"}`}
                 onClick={() => {
                   setOpen();
                 }}
               >
-                <div className="text-base">Tất cả</div>
+                <div className="text-sm">Tất cả</div>
               </ButtonSpotlight>
             </Link>
             {topics.map((topic) => (

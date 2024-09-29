@@ -22,7 +22,6 @@ export default function ModalChooseDoing({
   onClick,
 }: IProps) {
   const audioRef = useRef(null);
-  console.log(practiceWord);
 
   const onPlaying = () => {
     if (audioRef.current) {

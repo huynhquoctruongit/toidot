@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="container mx-auto flex w-full items-center py-3">
+      <header className="container mx-auto flex w-full items-center py-1">
         <div className="relative flex size-full items-center justify-between">
           <Link href="/" className="logo-item">
             <Image
@@ -68,7 +68,7 @@ const Header = () => {
                 color="gradientPrimary"
                 pill="roundedFull"
                 className="text-white"
-                spaceSide="space"
+                spaceSide="space_1"
               >
                 BEM TỪ VỰNG
                 <div className="absolute -right-1 -top-2 flex size-6 items-center justify-center rounded-full bg-white shadow">

@@ -50,11 +50,11 @@ export default function HeadLearningTopic({
                   type="button"
                   color="gradientPrimary"
                   pill="roundedFull"
-                  spaceSide="space"
+                  spaceSide="space_3"
                   onClick={() => {
                     handleActiveTopic();
                   }}
-                  className="text-white"
+                  className="text-sm text-white"
                 >
                   Luyện tập ngay
                 </ButtonSpotlight>

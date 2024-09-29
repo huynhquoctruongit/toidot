@@ -26,14 +26,14 @@ export default function TabsTopic({ topic, setOpen, setPage }: IProps) {
     <Link href={`${pathname}?${urlParams}`}>
       <ButtonSpotlight
         pill="roundedFull"
-        spaceSide="space"
+        spaceSide="space_3"
         className={`flex items-center border ${params.get("id") === topic?.id?.toString() ? "gradient-secondary text-white" : "bg-white"}`}
         onClick={() => {
           setPage(0);
           if (setOpen) setOpen();
         }}
       >
-        <div className="text-base">{topic.title}</div>
+        <div className="text-sm">{topic.title}</div>
       </ButtonSpotlight>
     </Link>
   );

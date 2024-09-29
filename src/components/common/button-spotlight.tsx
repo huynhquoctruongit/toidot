@@ -9,7 +9,13 @@ type IColor =
 
 type IPill = "default" | "rounded" | "roundedFull";
 
-type ISpaceSides = "default" | "space" | "spaceSm";
+type ISpaceSides =
+  | "default"
+  | "space"
+  | "spaceSm"
+  | "space_1"
+  | "space_2"
+  | "space_3";
 
 const colors = {
   default: "bg-white",
@@ -29,6 +35,9 @@ const spaceSides = {
   default: "px-6 py-2",
   space: "py-3.5 px-6",
   spaceSm: "px-4 py-2",
+  space_1: "px-4 py-1",
+  space_2: "px-4 py-2",
+  space_3: "px-4 py-3",
 };
 
 interface IButtonSpotlight {
